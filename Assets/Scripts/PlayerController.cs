@@ -61,10 +61,10 @@ public class PlayerController : MonoBehaviour
         }
 
         // jump buffer timer should decrease when jump button has not been pushed down
-        jumpBufferTimer = jInput && !oldJInput ? jumpBufferTime : Mathf.Max(0, jumpBufferTimer - Time.deltaTime);
+        jumpBufferTimer = jInput && !oldJInput ? jumpBufferTime : Helpers.FixedTimer(jumpBufferTimer);
         
         // coyote timer should decrease when not on the ground
-        coyoteTimer = isGrounded ? coyoteTime : Mathf.Max(0, coyoteTimer - Time.deltaTime);
+        coyoteTimer = isGrounded ? coyoteTime : Helpers.FixedTimer(coyoteTimer);
 
         // we know the player should jump if both timers are active simultaneously
         if (jumpBufferTimer > 0 && coyoteTimer > 0) {
