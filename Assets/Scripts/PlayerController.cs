@@ -7,9 +7,20 @@ public class PlayerController : MonoBehaviour
     public float maxXSpeed;
     public float xAccel;
     public float jumpPower;
+    public float verticalJerk;
+    public float maxFallSpeed;
+    float baseGravity;
+
+    public float jumpBufferTime;
+    public float coyoteTime;
+    float jumpBufferTimer;
+    float coyoteTimer;
 
     Rigidbody2D rb2d;
     SpriteRenderer sr;
+
+    public CollisionCheck groundcheck;
+    bool isGrounded { get { return groundcheck.IsColliding; }}
 
 
     float xInput;
@@ -20,6 +31,8 @@ public class PlayerController : MonoBehaviour
     private void Start() {
         rb2d = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>(); // will be deleted when the sprite is no longer attached to the same gameobject as the script
+    
+        baseGravity = rb2d.gravityScale;
     }
 
     private void Update() {
@@ -47,8 +60,35 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (jInput && !oldJInput) {
+        // jump buffer timer should decrease when jump button has not been pushed down
+        jumpBufferTimer = jInput && !oldJInput ? jumpBufferTime : Mathf.Max(0, jumpBufferTimer - Time.deltaTime);
+        
+        // coyote timer should decrease when not on the ground
+        coyoteTimer = isGrounded ? coyoteTime : Mathf.Max(0, coyoteTimer - Time.deltaTime);
+
+        // we know the player should jump if both timers are active simultaneously
+        if (jumpBufferTimer > 0 && coyoteTimer > 0) {
             vel.y = jumpPower;
+
+            // reset timers
+            jumpBufferTimer = 0;
+            coyoteTimer = 0;
+        }
+
+        if (vel.y > 0 && !jInput && oldJInput) {
+            // player has stopped holding jump - decrease y velocity to let player jump shorter
+            vel.y /= 2;
+        }
+
+        vel.y = Mathf.Max(vel.y, -maxFallSpeed);
+
+        if (isGrounded) {
+            // player is not falling, so set gravity scale to base level
+            rb2d.gravityScale = baseGravity;
+        }
+        else if (vel.y < maxFallSpeed) {
+            // player is not yet falling at max speed, so increase gravity scale to fall faster
+            rb2d.gravityScale += verticalJerk;
         }
 
         rb2d.velocity = vel;

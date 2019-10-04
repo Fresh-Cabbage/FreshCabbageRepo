@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6259706872622238908}
   m_Layer: 0
   m_Name: SquarePlayer
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -146,6 +146,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxXSpeed: 10
   xAccel: 5
+  jumpPower: 15
+  verticalJerk: 0.3
+  maxFallSpeed: 40
+  jumpBufferTime: 0.15
+  coyoteTime: 0.15
+  groundcheck: {fileID: 5469750575001678281}
 --- !u!1 &6232246917518937096
 GameObject:
   m_ObjectHideFlags: 0
@@ -156,6 +162,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1668558032738856221}
   - component: {fileID: 97478353822023972}
+  - component: {fileID: 5469750575001678281}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -203,3 +210,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.9656801, y: 0.08765149}
   m_EdgeRadius: 0
+--- !u!114 &5469750575001678281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6232246917518937096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7f7e5188d0205d469a8e1398fd536c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isColliding: 0
+  targetTags:
+  - Ground
