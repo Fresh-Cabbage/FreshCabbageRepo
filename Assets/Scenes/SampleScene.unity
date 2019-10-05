@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 623966789}
   - component: {fileID: 623966788}
   - component: {fileID: 623966787}
+  - component: {fileID: 623966790}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -204,6 +205,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &623966790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 623966786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f0bde09ea4d85d4db441fe86e9c7f1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1213001004}
+  lerpSpeed: 0.2
 --- !u!1 &889911630
 GameObject:
   m_ObjectHideFlags: 0
@@ -833,6 +848,12 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &1213001004 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 412224875422695345, guid: 80e6ef12ff04cd7409ee34dda96e90eb,
+    type: 3}
+  m_PrefabInstance: {fileID: 6559323647980151496}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1891640593
 GameObject:
   m_ObjectHideFlags: 0
