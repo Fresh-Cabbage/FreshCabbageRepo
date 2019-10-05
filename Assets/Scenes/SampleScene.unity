@@ -198,7 +198,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 623966786}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -219,6 +219,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1213001004}
   lerpSpeed: 0.2
+  currentShakes:
+  - maxPosIntensity: 3
+    maxRotIntensity: 25
+    shakeTime: 1
+    roughness: 8.856393
+    shakeTimer: 1
+    randomIter: 24
 --- !u!1 &889911630
 GameObject:
   m_ObjectHideFlags: 0
