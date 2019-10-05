@@ -13,14 +13,18 @@ public class CameraController : MonoBehaviour
 
     List<CameraShakeData> currentShakes;
 
-    public CameraShakeData playerDeathShakeData;
+    public CameraShakeData smallShake;
+    public CameraShakeData normalShake;
+    public CameraShakeData bigShake;
 
 
     private void OnEnable() {
-        PlayerController.OnDeath += StartPlayerDeathShake;
+        Totem.OnLand += StartNormalShake;
+        PlayerController.OnDeath += StartBigShake;
     }
     private void OnDisable() {
-        PlayerController.OnDeath -= StartPlayerDeathShake;
+        Totem.OnLand -= StartNormalShake;
+        PlayerController.OnDeath -= StartBigShake;
     }
 
     private void Start() {
@@ -46,8 +50,6 @@ public class CameraController : MonoBehaviour
             transform.rotation = Quaternion.identity;
         }
         for (int i = currentShakes.Count - 1; i >= 0; i--) {
-            Debug.Log("there is a shake!");
-
             CameraShakeData shake = currentShakes[i];
 
             if (shake.IsComplete) {
@@ -64,11 +66,9 @@ public class CameraController : MonoBehaviour
 
 
 
-    // SHAKE PRESETS
-    void StartPlayerDeathShake() {
-        StartShake(playerDeathShakeData);
-    }
-    //...
+    void StartSmallShake() => StartShake(smallShake);
+    void StartNormalShake() => StartShake(normalShake);
+    void StartBigShake() => StartShake(bigShake);
 
     void StartShake(CameraShakeData preset) {
         StartShake(preset.maxPosIntensity, preset.maxRotIntensity, preset.shakeTime, preset.roughness);
