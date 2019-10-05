@@ -28,6 +28,10 @@ public class PlayerController : MonoBehaviour
     bool jInput;
     bool oldJInput;
 
+    
+    // events!
+    public delegate void PlayerAction();
+    public static PlayerAction OnDeath;
 
     private void Start() {
         rb2d = GetComponent<Rigidbody2D>();
@@ -103,7 +107,9 @@ public class PlayerController : MonoBehaviour
 
 
     private void Die() {
+        OnDeath();
         GameManager.Instance?.PlayerDied();
+        
         Destroy(gameObject);
     }
 }
