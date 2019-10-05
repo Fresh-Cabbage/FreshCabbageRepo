@@ -149,7 +149,7 @@ MonoBehaviour:
   xAccel: 5
   jumpPower: 15
   verticalJerk: 0.3
-  maxFallSpeed: 40
+  maxFallSpeed: 39
   jumpBufferTime: 0.15
   coyoteTime: 0.15
   groundcheck: {fileID: 5469750575001678281}
