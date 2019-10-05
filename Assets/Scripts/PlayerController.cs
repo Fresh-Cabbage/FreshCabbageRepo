@@ -109,7 +109,7 @@ public class PlayerController : MonoBehaviour
     private void Die() {
         OnDeath();
         GameManager.Instance?.PlayerDied();
-        
+
         Destroy(gameObject);
     }
 }

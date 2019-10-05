@@ -115,9 +115,6 @@ public class CameraShakeData {
 
 
     // note: will replace with full easings class later
-    static public float EaseOut(float p)
-	{
-		return p * p * p;
-	}
+    static public float EaseOut(float p) => p * p * p;
 
 }
