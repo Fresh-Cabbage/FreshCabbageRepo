@@ -8,7 +8,7 @@ public class Totem : MonoBehaviour
     public static TotemAction OnLand;
 
     private void OnCollisionEnter2D(Collision2D collision) {
-        if (collision.gameObject.CompareTag("Ground") && Vector2.Angle(Vector2.up, collision.contacts[0].normal) < 10f) {
+        if (Vector2.Angle(Vector2.up, collision.contacts[0].normal) < 10f) {
             OnLand();
         }
     }

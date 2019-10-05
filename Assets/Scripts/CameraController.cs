@@ -44,11 +44,9 @@ public class CameraController : MonoBehaviour
 
     void DoShakes() {
         // shakes
-        if (currentShakes.Count == 0) {
-            // reset pos and rot
-            transform.position = anchorPosition;
-            transform.rotation = Quaternion.identity;
-        }
+        transform.position = anchorPosition;
+        transform.rotation = Quaternion.identity;
+        
         for (int i = currentShakes.Count - 1; i >= 0; i--) {
             CameraShakeData shake = currentShakes[i];
 
@@ -57,8 +55,8 @@ public class CameraController : MonoBehaviour
                 continue;
             }
             
-            transform.position = anchorPosition + shake.GetShakePos().ToVector3(anchorPosition.z);
-            transform.rotation = Quaternion.Euler(0, 0, shake.GetShakeRot());
+            transform.position += shake.GetShakePos().ToVector3(anchorPosition.z);
+            transform.rotation = Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z + shake.GetShakeRot());
 
             shake.AdvanceShake();
         }

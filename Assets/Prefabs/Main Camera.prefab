@@ -99,17 +99,17 @@ MonoBehaviour:
   player: {fileID: 0}
   lerpSpeed: 0.2
   smallShake:
-    maxPosIntensity: 2
+    maxPosIntensity: 1
     maxRotIntensity: 0
-    shakeTime: 0.5
+    shakeTime: 0.3
     roughness: 5
   normalShake:
-    maxPosIntensity: 3
+    maxPosIntensity: 2
     maxRotIntensity: 5
-    shakeTime: 1
+    shakeTime: 0.6
     roughness: 10
   bigShake:
-    maxPosIntensity: 5
-    maxRotIntensity: 10
-    shakeTime: 1
+    maxPosIntensity: 7
+    maxRotIntensity: 12
+    shakeTime: 1.2
     roughness: 25
