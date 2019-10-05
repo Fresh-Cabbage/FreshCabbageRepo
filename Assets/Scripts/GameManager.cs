@@ -30,4 +30,13 @@ public class GameManager : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode loadMode) {
 
     }
+
+    IEnumerator LoadScene(string name, float delay) {
+        yield return new WaitForSeconds(delay);
+        SceneManager.LoadScene(name);
+    }
+
+    public void PlayerDied() {
+        StartCoroutine(LoadScene(SceneManager.GetActiveScene().name, 1.0f));
+    }
 }

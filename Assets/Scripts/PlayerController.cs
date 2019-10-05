@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     SpriteRenderer sr;
 
     public CollisionCheck groundcheck;
+    public CollisionCheck hazardcheck;
     bool isGrounded { get { return groundcheck.IsColliding; }}
 
 
@@ -36,6 +37,9 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Update() {
+        if (hazardcheck.IsColliding)
+            Die();
+
         // get inputs
         xInput = Input.GetAxisRaw("Horizontal");
         jInput = Input.GetAxisRaw("Jump") > 0;
@@ -95,5 +99,11 @@ public class PlayerController : MonoBehaviour
 
         // indicate that we have used the current jump input
         oldJInput = jInput;
+    }
+
+
+    private void Die() {
+        GameManager.Instance?.PlayerDied();
+        Destroy(gameObject);
     }
 }
