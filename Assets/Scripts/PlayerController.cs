@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float maxXSpeed;
-    public float xAccel;
-    public float jumpPower;
-    public float verticalJerk;
-    public float maxFallSpeed;
+    public MovementProfile normalMovement;
+    public MovementProfile totemMovement;
+
     float baseGravity;
 
     public float jumpBufferTime;
@@ -22,6 +20,9 @@ public class PlayerController : MonoBehaviour
     public CollisionCheck groundcheck;
     public CollisionCheck hazardcheck;
     bool isGrounded { get { return groundcheck.IsColliding; }}
+
+
+    public Totem heldTotem;
 
 
     float xInput;
@@ -50,21 +51,23 @@ public class PlayerController : MonoBehaviour
     }
 
     private void FixedUpdate() {
+        MovementProfile mov = heldTotem ? totemMovement : normalMovement;
+
         Vector2 vel = rb2d.velocity;
 
         if (xInput != 0) {
             // accelerate player in the direction of motion
-            vel.x += xInput * xAccel;
-            vel.x = Mathf.Clamp(vel.x, -maxXSpeed, maxXSpeed);
+            vel.x += xInput * mov.xAccel;
+            vel.x = Mathf.Clamp(vel.x, -mov.maxXSpeed, mov.maxXSpeed);
         }
         else {
-            if (Mathf.Abs(vel.x) < xAccel) {
+            if (Mathf.Abs(vel.x) < mov.xAccel) {
                 // player should stop
                 vel.x = 0;
             }
             else {
                 // player's speed should decrease
-                vel.x -= Mathf.Sign(vel.x) * xAccel;
+                vel.x -= Mathf.Sign(vel.x) * mov.xAccel;
             }
         }
 
@@ -76,7 +79,7 @@ public class PlayerController : MonoBehaviour
 
         // we know the player should jump if both timers are active simultaneously
         if (jumpBufferTimer > 0 && coyoteTimer > 0) {
-            vel.y = jumpPower;
+            vel.y = mov.jumpPower;
 
             // reset timers
             jumpBufferTimer = 0;
@@ -88,15 +91,15 @@ public class PlayerController : MonoBehaviour
             vel.y /= 2;
         }
 
-        vel.y = Mathf.Max(vel.y, -maxFallSpeed);
+        vel.y = Mathf.Max(vel.y, -mov.maxFallSpeed);
 
         if (isGrounded) {
             // player is not falling, so set gravity scale to base level
             rb2d.gravityScale = baseGravity;
         }
-        else if (vel.y < maxFallSpeed) {
+        else if (vel.y < mov.maxFallSpeed) {
             // player is not yet falling at max speed, so increase gravity scale to fall faster
-            rb2d.gravityScale += verticalJerk;
+            rb2d.gravityScale += mov.verticalJerk;
         }
 
         rb2d.velocity = vel;
@@ -112,4 +115,14 @@ public class PlayerController : MonoBehaviour
 
         Destroy(gameObject);
     }
+}
+
+
+[System.Serializable]
+public struct MovementProfile {
+    public float maxXSpeed;
+    public float xAccel;
+    public float jumpPower;
+    public float verticalJerk;
+    public float maxFallSpeed;
 }
