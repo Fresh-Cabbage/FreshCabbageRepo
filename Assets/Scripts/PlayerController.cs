@@ -19,15 +19,22 @@ public class PlayerController : MonoBehaviour
 
     public CollisionCheck groundcheck;
     public CollisionCheck hazardcheck;
+    public CollisionCheck totemcheck;
     bool isGrounded { get { return groundcheck.IsColliding; }}
 
 
-    public Totem heldTotem;
+    TotemContainer heldTotem;
+    public float totemThrowSpeed;
+    public Vector2 totemHoldPosition;
 
 
     float xInput;
     bool jInput;
+    bool tInput;
     bool oldJInput;
+    bool oldTInput;
+
+    bool tPressed { get { return tInput && !oldTInput; }}
 
     
     // events!
@@ -48,6 +55,14 @@ public class PlayerController : MonoBehaviour
         // get inputs
         xInput = Input.GetAxisRaw("Horizontal");
         jInput = Input.GetAxisRaw("Jump") > 0;
+
+        oldTInput = tInput;
+        tInput = Input.GetAxisRaw("Cancel") > 0;
+
+
+        if (tPressed) {
+            DoTotem();
+        }
     }
 
     private void FixedUpdate() {
@@ -109,11 +124,31 @@ public class PlayerController : MonoBehaviour
     }
 
 
+    void DoTotem() {
+        if (heldTotem == null) {
+            // no totem held: check for new totem
+            if (totemcheck.collider == null) return;
+            
+            heldTotem = totemcheck.collider.GetComponent<Totem>()?.parent;
+            heldTotem?.HoldTotem(transform, totemHoldPosition.ToVector3());
+        }
+        else {
+            // totem held: release it
+            heldTotem.ReleaseTotem(transform.right * transform.localScale.x * totemThrowSpeed);
+            heldTotem = null;
+        }
+    }
+
     private void Die() {
         OnDeath();
         GameManager.Instance?.PlayerDied();
 
         Destroy(gameObject);
+    }
+
+
+    private void OnDrawGizmos() {
+        Gizmos.DrawWireSphere(transform.position + totemHoldPosition.ToVector3(), 0.2f);
     }
 }
 
