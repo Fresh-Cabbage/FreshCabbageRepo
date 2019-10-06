@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
@@ -7,6 +8,8 @@ public class CameraController : MonoBehaviour
     public GameObject player; // camera will be connected to the player another way when scene flow starts being implemented
     
     public float lerpSpeed;
+
+    public Vector3 followOffset;
 
     Vector3 targetPosition;
     Vector3 anchorPosition;
@@ -34,7 +37,7 @@ public class CameraController : MonoBehaviour
 
     private void FixedUpdate() {
         if (player != null)
-            targetPosition = player.transform.position.WithZ(anchorPosition.z);
+            targetPosition = player.transform.position.WithZ(anchorPosition.z) + followOffset;
 
         transform.position = Vector3.Lerp(anchorPosition, targetPosition, lerpSpeed);
         anchorPosition = transform.position;
