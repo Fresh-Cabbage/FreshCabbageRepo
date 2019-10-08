@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
 
 
     TotemContainer heldTotem;
-    public float totemThrowSpeed;
+    public Vector2 totemThrowVel;
     public Vector2 totemHoldPosition;
 
 
@@ -57,8 +57,15 @@ public class PlayerController : MonoBehaviour
         jInput = Input.GetAxisRaw("Jump") > 0;
 
         oldTInput = tInput;
-        tInput = Input.GetAxisRaw("Cancel") > 0;
+        tInput = Input.GetAxisRaw("Interact") > 0;
 
+        // check for flip when player is moving in direction of input
+        if (xInput * rb2d.velocity.x > 0) {
+            // flip when signs of velocity and local scale do not match
+            if (Mathf.Sign(rb2d.velocity.x) != Mathf.Sign(transform.localScale.x)) {
+                transform.localScale = transform.localScale.WithX(transform.localScale.x * -1);
+            }
+        }
 
         if (tPressed) {
             DoTotem();
@@ -134,7 +141,7 @@ public class PlayerController : MonoBehaviour
         }
         else {
             // totem held: release it
-            heldTotem.ReleaseTotem(transform.right * transform.localScale.x * totemThrowSpeed);
+            heldTotem.ReleaseTotem(totemThrowVel.WithX(totemThrowVel.x * Mathf.Sign(transform.localScale.x)));
             heldTotem = null;
         }
     }

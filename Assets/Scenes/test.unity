@@ -1129,7 +1129,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 5
+  m_Constraints: 4
 --- !u!114 &1727656388 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4894606828287497393, guid: 1826a5602d52e9647882b7900a2c2b0f,
@@ -1213,6 +1213,21 @@ PrefabInstance:
         type: 3}
       propertyPath: heldTotem
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6259706872622238908, guid: 80e6ef12ff04cd7409ee34dda96e90eb,
+        type: 3}
+      propertyPath: totemThrowSpeed
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6259706872622238908, guid: 80e6ef12ff04cd7409ee34dda96e90eb,
+        type: 3}
+      propertyPath: totemThrowVel.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6259706872622238908, guid: 80e6ef12ff04cd7409ee34dda96e90eb,
+        type: 3}
+      propertyPath: totemThrowVel.x
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80e6ef12ff04cd7409ee34dda96e90eb, type: 3}

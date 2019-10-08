@@ -44,6 +44,7 @@ public class TotemContainer : MonoBehaviour
         unheld.gameObject.SetActive(true);
 
         unheld.transform.position = held.transform.position;
-        unheld.rb2d.velocity = throwDirection;
+        transform.SetParent(null);
+        unheld.Throw(throwDirection);
     }
 }
