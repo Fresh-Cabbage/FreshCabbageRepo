@@ -6,6 +6,7 @@ public class TotemContainer : MonoBehaviour
 {
     public Totem held;
     public Totem unheld;
+    public EffectRegion effectRegion;
 
     public bool isHeld;
 
@@ -15,6 +16,15 @@ public class TotemContainer : MonoBehaviour
         unheld.isHeld = false;
         held.parent = this;
         unheld.parent = this;
+    }
+
+    private void FixedUpdate() {
+        MoveEffectRegion();
+    }
+
+    void MoveEffectRegion() {
+        // the effect region does not have physics so we will manually set it to the right spot
+        effectRegion.transform.position = (isHeld ? held : unheld).transform.position;
     }
 
     public void HoldTotem(Transform newParent, Vector3 holdOffset) {
@@ -30,6 +40,9 @@ public class TotemContainer : MonoBehaviour
 
         transform.position = newParent.position + holdOffset;
         transform.SetParent(newParent);
+
+        MoveEffectRegion(); // avoid tearing
+        effectRegion.Inflate();
     }
 
     public void ReleaseTotem(Vector2 throwDirection) {
@@ -46,5 +59,8 @@ public class TotemContainer : MonoBehaviour
         unheld.transform.position = held.transform.position;
         transform.SetParent(null);
         unheld.Throw(throwDirection);
+
+        MoveEffectRegion(); // avoid tearing
+        effectRegion.Deflate();
     }
 }

@@ -5,13 +5,51 @@ using UnityEngine;
 public class EffectRegion : MonoBehaviour
 {
     public LineRenderer lr;
-    public float circleRadius;
+    public float baseRadius;
+    public float maxSize;
+    public float inflateSpeed;
+    public float deflateTime;
+
+    float deflateTimer;
+    float currentRadius;
+    bool isInflating;
+    bool shouldInflate;
 
     private void Start() {
-        DrawCircle(circleRadius);
+        transform.localScale = Vector3.zero.WithZ(1);
+
+        DrawCircle(baseRadius);
     }
 
+    private void FixedUpdate() {
+        if (isInflating) {
+            currentRadius = Mathf.Min(maxSize, currentRadius + inflateSpeed);
 
+            // state switch
+            if (currentRadius == maxSize && !shouldInflate) {
+                deflateTimer = deflateTime;
+                isInflating = false;
+            }
+        }
+        else {
+            deflateTimer = Helpers.Timer(deflateTimer);
+            currentRadius = maxSize * (Mathf.Pow(deflateTimer / deflateTime, .333f));
+
+            // state switch
+            if (shouldInflate)
+                isInflating = true;
+        }
+
+        transform.localScale = new Vector3(currentRadius, currentRadius, 1);
+    }
+
+    public void Inflate() {
+        shouldInflate = true;
+    }
+
+    public void Deflate() {
+        shouldInflate = false;
+    }
 
     void DrawCircle(float radius) {
         Vector3[] points = new Vector3[36];

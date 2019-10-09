@@ -244,4 +244,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lr: {fileID: 1513700271968013550}
-  circleRadius: 0.5
+  baseRadius: 0.5
+  maxSize: 8
+  inflateSpeed: 0.2
+  deflateTime: 10
