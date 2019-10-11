@@ -27,7 +27,7 @@ public class Totem : MonoBehaviour
             return;
 
         if (Vector2.Angle(Vector2.up, collision.contacts[0].normal) < 10f && rb2d.velocity.y <= 0.1f) {
-            OnLand();
+            OnLand?.Invoke();
 
             // stop motion
             rb2d.velocity = rb2d.velocity.WithX(0);

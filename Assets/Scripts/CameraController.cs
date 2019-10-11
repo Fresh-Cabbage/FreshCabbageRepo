@@ -5,13 +5,6 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public GameObject player; // camera will be connected to the player another way when scene flow starts being implemented
-    
-    public float lerpSpeed;
-
-    public Vector3 followOffset;
-
-    Vector3 targetPosition;
     Vector3 anchorPosition;
 
     List<CameraShakeData> currentShakes;
@@ -31,35 +24,30 @@ public class CameraController : MonoBehaviour
     }
 
     private void Start() {
-        anchorPosition = transform.position;
         currentShakes = new List<CameraShakeData>();
     }
 
     private void FixedUpdate() {
-        if (player != null)
-            targetPosition = player.transform.position.WithZ(anchorPosition.z) + followOffset;
-
-        transform.position = Vector3.Lerp(anchorPosition, targetPosition, lerpSpeed);
-        anchorPosition = transform.position;
-
+        anchorPosition = transform.localPosition;
         DoShakes();
     }
 
     void DoShakes() {
-        // shakes
-        transform.position = anchorPosition;
-        transform.rotation = Quaternion.identity;
+        // reset transform
+        transform.localPosition = anchorPosition;
+        transform.localRotation = Quaternion.identity;
         
         for (int i = currentShakes.Count - 1; i >= 0; i--) {
             CameraShakeData shake = currentShakes[i];
 
+            // discard completed shakes
             if (shake.IsComplete) {
                 currentShakes.RemoveAt(i);
                 continue;
             }
             
-            transform.position += shake.GetShakePos().ToVector3(anchorPosition.z);
-            transform.rotation = Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z + shake.GetShakeRot());
+            transform.localPosition = shake.GetShakePos().ToVector3(anchorPosition.z);
+            transform.localRotation = Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z + shake.GetShakeRot());
 
             shake.AdvanceShake();
         }
