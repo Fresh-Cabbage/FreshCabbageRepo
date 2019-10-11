@@ -7,12 +7,15 @@ public class PlayerController : MonoBehaviour
     public MovementProfile normalMovement;
     public MovementProfile totemMovement;
 
+    MovementState moveState;
+
     float baseGravity;
 
     public float jumpBufferTime;
     public float coyoteTime;
     float jumpBufferTimer;
     float coyoteTimer;
+    float minimumJumpTimer;
 
     Rigidbody2D rb2d;
     SpriteRenderer sr;
@@ -33,6 +36,7 @@ public class PlayerController : MonoBehaviour
     bool tInput;
     bool oldJInput;
     bool oldTInput;
+    bool dInput;
 
     bool tPressed { get { return tInput && !oldTInput; }}
 
@@ -55,6 +59,7 @@ public class PlayerController : MonoBehaviour
         // get inputs
         xInput = Input.GetAxisRaw("Horizontal");
         jInput = Input.GetAxisRaw("Jump") > 0;
+        dInput = Input.GetAxisRaw("Vertical") < 0;
 
         oldTInput = tInput;
         tInput = Input.GetAxisRaw("Interact") > 0;
@@ -77,7 +82,32 @@ public class PlayerController : MonoBehaviour
 
         Vector2 vel = rb2d.velocity;
 
-        if (xInput != 0) {
+        // first, handle general movement state stuff
+        if (moveState == MovementState.IDLE) {
+            // player ducked: transition to DUCK state
+            if (dInput && Mathf.Abs(vel.x) < 0.05f) {
+                sr.color = sr.color.WithAlpha(0.5f);
+                moveState = MovementState.DUCK;
+            }
+
+            // player is moving: transition to WALK state
+            else if (xInput != 0 && vel.x != 0) {
+                moveState = MovementState.WALK;
+            }
+        } else if (moveState == MovementState.WALK) {
+            if (Mathf.Abs(vel.x) < 0.05f) {
+                moveState = MovementState.IDLE;
+            }
+        } else if (moveState == MovementState.DUCK) {
+            // player unducked: transition to IDLE state
+            if (!dInput) {
+                sr.color = sr.color.WithAlpha(1f);
+                moveState = MovementState.IDLE;
+            }
+        }
+        Debug.Log(moveState);
+
+        if (moveState != MovementState.DUCK && xInput != 0) {
             // accelerate player in the direction of motion
             vel.x += xInput * mov.xAccel;
             vel.x = Mathf.Clamp(vel.x, -mov.maxXSpeed, mov.maxXSpeed);
@@ -99,17 +129,25 @@ public class PlayerController : MonoBehaviour
         // coyote timer should decrease when not on the ground
         coyoteTimer = isGrounded ? coyoteTime : Helpers.FixedTimer(coyoteTimer);
 
+        // minimum jump timer should just always decrease
+        minimumJumpTimer = Helpers.FixedTimer(minimumJumpTimer);
+
         // we know the player should jump if both timers are active simultaneously
-        if (jumpBufferTimer > 0 && coyoteTimer > 0) {
+        if (jumpBufferTimer > 0 && coyoteTimer > 0 && moveState.CanGoToJump()) {
+            moveState = MovementState.JUMP;
             vel.y = mov.jumpPower;
+
+            // start minimum jump timer
+            minimumJumpTimer = 0.02f;
 
             // reset timers
             jumpBufferTimer = 0;
             coyoteTimer = 0;
         }
 
-        if (vel.y > 0 && !jInput && oldJInput) {
-            // player has stopped holding jump - decrease y velocity to let player jump shorter
+        if (minimumJumpTimer == 0 && moveState == MovementState.JUMP && (!jInput || rb2d.velocity.y < 0.2f)) {
+            // player's jump has terminated (either by releasing the jump button or by starting to move down)
+            moveState = MovementState.FALL;
             vel.y /= 2;
         }
 
@@ -118,10 +156,19 @@ public class PlayerController : MonoBehaviour
         if (isGrounded) {
             // player is not falling, so set gravity scale to base level
             rb2d.gravityScale = baseGravity;
+
+            if ((moveState == MovementState.JUMP && minimumJumpTimer == 0) || moveState == MovementState.FALL) {
+                // player has landed
+                moveState = MovementState.IDLE;
+            }
         }
         else if (vel.y < mov.maxFallSpeed) {
             // player is not yet falling at max speed, so increase gravity scale to fall faster
             rb2d.gravityScale += mov.verticalJerk;
+
+            if (moveState != MovementState.JUMP) {
+                moveState = MovementState.FALL;
+            }
         }
 
         rb2d.velocity = vel;
@@ -133,8 +180,17 @@ public class PlayerController : MonoBehaviour
 
     void DoTotem() {
         if (heldTotem == null) {
-            // no totem held: check for new totem
+            // player is trying to grab a totem
+            // reject if the player can't grab in current state
+            if (!isGrounded || Mathf.Abs(rb2d.velocity.x) > totemMovement.maxXSpeed) return;
+
+            // reject if there is no totem in front of the player
             if (totemcheck.collider == null) return;
+
+            Totem theTotem = totemcheck.collider.GetComponent<Totem>();
+
+            // reject if the totem is not grabbale in its current state
+            if (theTotem.rb2d.velocity.magnitude > 0.1f) return;
             
             heldTotem = totemcheck.collider.GetComponent<Totem>()?.parent;
             heldTotem?.HoldTotem(transform, totemHoldPosition.ToVector3());
