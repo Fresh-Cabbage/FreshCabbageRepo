@@ -155,7 +155,7 @@ MonoBehaviour:
   totemMovement:
     maxXSpeed: 5
     xAccel: 1.5
-    jumpPower: 10
+    jumpPower: 11
     verticalJerk: 0.3
     maxFallSpeed: 39
   jumpBufferTime: 0.15
@@ -163,7 +163,7 @@ MonoBehaviour:
   groundcheck: {fileID: 5469750575001678281}
   hazardcheck: {fileID: 1504612737827210429}
   totemcheck: {fileID: 3399870243615498373}
-  totemThrowSpeed: 5
+  totemThrowVel: {x: 0, y: 0}
   totemHoldPosition: {x: 0, y: 1.25}
 --- !u!1 &2136069959226189475
 GameObject:
