@@ -8,7 +8,7 @@ public class CollisionCheck : MonoBehaviour
     [SerializeField] private bool isColliding;
     public bool IsColliding { get { return isColliding; }}
 
-    public new Collider2D collider; // do not depend on this to always exist if IsColliding is true - a fix for this is coming
+    [HideInInspector] public new Collider2D collider; // do not depend on this to always exist if IsColliding is true - a fix for this is coming
 
     public List<string> targetTags;
 
