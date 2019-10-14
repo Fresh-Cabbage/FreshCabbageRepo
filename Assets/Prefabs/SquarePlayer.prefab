@@ -147,7 +147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   normalMovement:
-    maxXSpeed: 10
+    maxXSpeed: 7
     xAccel: 5
     jumpPower: 15
     verticalJerk: 0.3

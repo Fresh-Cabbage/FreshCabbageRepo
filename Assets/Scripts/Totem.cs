@@ -28,15 +28,10 @@ public class Totem : MonoBehaviour
 
         if (Vector2.Angle(Vector2.up, collision.contacts[0].normal) < 10f && rb2d.velocity.y <= 0.1f) {
             OnLand?.Invoke();
-
-            // stop motion
-            rb2d.velocity = rb2d.velocity.WithX(0);
-            rb2d.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
         }
     }
 
     public void Throw(Vector2 direction) {
-        rb2d.constraints = RigidbodyConstraints2D.FreezeRotation;
         rb2d.velocity = direction;
     }
 }

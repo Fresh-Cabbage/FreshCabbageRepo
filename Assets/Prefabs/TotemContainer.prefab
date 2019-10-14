@@ -12,7 +12,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 12
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 3
@@ -78,11 +78,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9159489328564819609}
     m_Modifications:
-    - target: {fileID: 1513700273054322579, guid: 32b6780a884064a48a17ae446583f155,
-        type: 3}
-      propertyPath: m_Name
-      value: EffectRegion
-      objectReference: {fileID: 0}
     - target: {fileID: 1513700273054322580, guid: 32b6780a884064a48a17ae446583f155,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -138,6 +133,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1513700273054322579, guid: 32b6780a884064a48a17ae446583f155,
+        type: 3}
+      propertyPath: m_Name
+      value: EffectRegion
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32b6780a884064a48a17ae446583f155, type: 3}
 --- !u!4 &2631449080250847821 stripped
@@ -165,16 +165,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9159489328564819609}
     m_Modifications:
-    - target: {fileID: 6604639847181484424, guid: 1826a5602d52e9647882b7900a2c2b0f,
-        type: 3}
-      propertyPath: m_Name
-      value: Totem (Held)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6604639847181484424, guid: 1826a5602d52e9647882b7900a2c2b0f,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2030945613870486500, guid: 1826a5602d52e9647882b7900a2c2b0f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -230,6 +220,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6604639847181484424, guid: 1826a5602d52e9647882b7900a2c2b0f,
+        type: 3}
+      propertyPath: m_Name
+      value: Totem (Held)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6604639847181484424, guid: 1826a5602d52e9647882b7900a2c2b0f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1826a5602d52e9647882b7900a2c2b0f, type: 3}
 --- !u!4 &5776934127407078243 stripped
@@ -257,11 +257,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9159489328564819609}
     m_Modifications:
-    - target: {fileID: 6604639847181484424, guid: 1826a5602d52e9647882b7900a2c2b0f,
-        type: 3}
-      propertyPath: m_Name
-      value: Totem (Unheld)
-      objectReference: {fileID: 0}
     - target: {fileID: 2030945613870486500, guid: 1826a5602d52e9647882b7900a2c2b0f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -302,6 +297,16 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6604639847181484424, guid: 1826a5602d52e9647882b7900a2c2b0f,
+        type: 3}
+      propertyPath: m_Name
+      value: Totem (Unheld)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5680967643386254334, guid: 1826a5602d52e9647882b7900a2c2b0f,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 6bad2621a17e8fa4883f8fed8ff97645, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1826a5602d52e9647882b7900a2c2b0f, type: 3}
 --- !u!1 &2645143438870913178 stripped

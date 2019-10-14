@@ -8,5 +8,5 @@ public enum MovementState {
 
 
 public static class MovementStateExtensions {
-    public static bool CanGoToJump(this MovementState state) => state == MovementState.IDLE || state == MovementState.WALK;
+    public static bool CanGoToJump(this MovementState state) => state != MovementState.DUCK && state != MovementState.JUMP;
 }
