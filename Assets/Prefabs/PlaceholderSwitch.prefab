@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   door: {fileID: 0}
+  defaultState: 1
   offColor: {r: 1, g: 0.4292453, b: 0.4292453, a: 1}
   onColor: {r: 0.4575472, g: 1, b: 0.5390907, a: 1}
 --- !u!212 &3383425701766995548

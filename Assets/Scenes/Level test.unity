@@ -2545,6 +2545,11 @@ PrefabInstance:
       propertyPath: door
       value: 
       objectReference: {fileID: 529711569}
+    - target: {fileID: 3383425701766995555, guid: aaf77276db466484f9812414f0a959f2,
+        type: 3}
+      propertyPath: defaultState
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aaf77276db466484f9812414f0a959f2, type: 3}
 --- !u!1001 &9063189110459461850
@@ -2554,6 +2559,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1741090403}
     m_Modifications:
+    - target: {fileID: 9063189110797850369, guid: acba85a3032032c4bace0a8dd1adf994,
+        type: 3}
+      propertyPath: m_Name
+      value: Main Camera
+      objectReference: {fileID: 0}
     - target: {fileID: 9063189110797850373, guid: acba85a3032032c4bace0a8dd1adf994,
         type: 3}
       propertyPath: m_RootOrder
@@ -2578,11 +2588,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9063189110797850369, guid: acba85a3032032c4bace0a8dd1adf994,
-        type: 3}
-      propertyPath: m_Name
-      value: Main Camera
       objectReference: {fileID: 0}
     - target: {fileID: 9063189110797850374, guid: acba85a3032032c4bace0a8dd1adf994,
         type: 3}

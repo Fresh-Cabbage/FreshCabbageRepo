@@ -8,6 +8,8 @@ public class PlaceholderSwitch : MonoBehaviour
     CollisionCheck effectCheck;
     public GameObject door;
 
+    public bool defaultState;
+
     public Color offColor;
     public Color onColor;
 
@@ -19,6 +21,6 @@ public class PlaceholderSwitch : MonoBehaviour
 
     private void Update() {
         sr.color = effectCheck.IsColliding ? onColor : offColor;
-        door.SetActive(!effectCheck.IsColliding);
+        door.SetActive(effectCheck.IsColliding ? !defaultState : defaultState);
     }
 }
