@@ -39,4 +39,11 @@ public class GameManager : MonoBehaviour
     public void PlayerDied() {
         StartCoroutine(LoadScene(SceneManager.GetActiveScene().name, 1.0f));
     }
+
+
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.R)) {
+            StartCoroutine(LoadScene(SceneManager.GetActiveScene().name, 0.0f));
+        }
+    }
 }
