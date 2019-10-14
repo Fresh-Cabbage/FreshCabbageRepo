@@ -390,31 +390,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3383425701766995548, guid: 273cfe4a9edb8894b87e0fd95dd6280c,
-        type: 3}
-      propertyPath: m_Color.a
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1006772930248377528, guid: 273cfe4a9edb8894b87e0fd95dd6280c,
-        type: 3}
-      propertyPath: offColor.r
-      value: 0.9056604
-      objectReference: {fileID: 0}
-    - target: {fileID: 1006772930248377528, guid: 273cfe4a9edb8894b87e0fd95dd6280c,
-        type: 3}
-      propertyPath: offColor.g
-      value: 0.47419012
-      objectReference: {fileID: 0}
-    - target: {fileID: 1006772930248377528, guid: 273cfe4a9edb8894b87e0fd95dd6280c,
-        type: 3}
-      propertyPath: offColor.b
-      value: 0.47419012
-      objectReference: {fileID: 0}
-    - target: {fileID: 744791502466639355, guid: 273cfe4a9edb8894b87e0fd95dd6280c,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 273cfe4a9edb8894b87e0fd95dd6280c, type: 3}
 --- !u!1 &330193625
@@ -2632,6 +2607,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1741090403}
     m_Modifications:
+    - target: {fileID: 9063189110797850369, guid: acba85a3032032c4bace0a8dd1adf994,
+        type: 3}
+      propertyPath: m_Name
+      value: Main Camera
+      objectReference: {fileID: 0}
     - target: {fileID: 9063189110797850373, guid: acba85a3032032c4bace0a8dd1adf994,
         type: 3}
       propertyPath: m_RootOrder
@@ -2656,11 +2636,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9063189110797850369, guid: acba85a3032032c4bace0a8dd1adf994,
-        type: 3}
-      propertyPath: m_Name
-      value: Main Camera
       objectReference: {fileID: 0}
     - target: {fileID: 9063189110797850374, guid: acba85a3032032c4bace0a8dd1adf994,
         type: 3}
