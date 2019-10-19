@@ -17031,6 +17031,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1197241353 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2890070831016960006, guid: fb05dc36102f74a169fe9687d17583c9,
+    type: 3}
+  m_PrefabInstance: {fileID: 2890070830468813369}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1462445231
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17710,6 +17716,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FinishScreen
       objectReference: {fileID: 0}
+    - target: {fileID: 2890070831016960006, guid: fb05dc36102f74a169fe9687d17583c9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2890070831016960120, guid: fb05dc36102f74a169fe9687d17583c9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -18152,12 +18163,12 @@ PrefabInstance:
     - target: {fileID: 8224915590317958123, guid: cf11d96b2d85d44ccbe1ec8cb31d1a2c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.15
+      value: 21.07
       objectReference: {fileID: 0}
     - target: {fileID: 8224915590317958123, guid: cf11d96b2d85d44ccbe1ec8cb31d1a2c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.73
+      value: 0.81
       objectReference: {fileID: 0}
     - target: {fileID: 8224915590317958123, guid: cf11d96b2d85d44ccbe1ec8cb31d1a2c,
         type: 3}
@@ -18204,6 +18215,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8224915590317958121, guid: cf11d96b2d85d44ccbe1ec8cb31d1a2c,
+        type: 3}
+      propertyPath: finishScreen
+      value: 
+      objectReference: {fileID: 1197241353}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cf11d96b2d85d44ccbe1ec8cb31d1a2c, type: 3}
 --- !u!1001 &9159489328038197740

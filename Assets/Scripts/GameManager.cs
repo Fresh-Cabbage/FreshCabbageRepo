@@ -40,6 +40,10 @@ public class GameManager : MonoBehaviour
         StartCoroutine(LoadScene(SceneManager.GetActiveScene().name, 1.0f));
     }
 
+    public void CompletedLevel() {
+        StartCoroutine(LoadScene(SceneManager.GetActiveScene().name, 2.0f));
+    }
+
 
     private void Update() {
         if (Input.GetKeyDown(KeyCode.R)) {

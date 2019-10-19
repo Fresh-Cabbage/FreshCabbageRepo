@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8224915590317958121}
   m_Layer: 0
   m_Name: FinishTotem
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -143,4 +143,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26cd883459cac4b71a182db68669deeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  finishScreen: []
+  finishScreen: {fileID: 0}
