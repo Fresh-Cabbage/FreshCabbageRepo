@@ -16,18 +16,23 @@ public class TotemContainer : MonoBehaviour
         unheld.isHeld = false;
         held.parent = this;
         unheld.parent = this;
+
+        SetEffectRegionState();
     }
 
-    private void FixedUpdate() {
-        MoveEffectRegion();
+    private void SetEffectRegionState() {
+        if (isHeld) {
+            effectRegion.Inflate();
+            effectRegion.transform.SetParent(held.transform);
+        } else {
+            effectRegion.Deflate();
+            effectRegion.transform.SetParent(unheld.transform);
+        }
+
+        effectRegion.transform.localPosition = Vector3.zero;
     }
 
-    void MoveEffectRegion() {
-        // the effect region does not have physics so we will manually set it to the right spot
-        effectRegion.transform.position = (isHeld ? held : unheld).transform.position;
-    }
-
-    public void HoldTotem(Transform newParent, Vector3 holdOffset) {
+    public void HoldTotem(Transform newParent) {
         if (isHeld) {
             Debug.LogError("Can't hold totem that is already being held");
             return;
@@ -38,11 +43,10 @@ public class TotemContainer : MonoBehaviour
         held.gameObject.SetActive(true);
         unheld.gameObject.SetActive(false);
 
-        transform.position = newParent.position + holdOffset;
+        transform.position = newParent.position;
         transform.SetParent(newParent);
 
-        MoveEffectRegion(); // avoid tearing
-        effectRegion.Inflate();
+        SetEffectRegionState();
     }
 
     public void ReleaseTotem(Vector2 throwDirection) {
@@ -60,7 +64,6 @@ public class TotemContainer : MonoBehaviour
         transform.SetParent(null);
         unheld.Throw(throwDirection);
 
-        MoveEffectRegion(); // avoid tearing
-        effectRegion.Deflate();
+        SetEffectRegionState();
     }
 }

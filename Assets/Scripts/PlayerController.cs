@@ -17,6 +17,9 @@ public class PlayerController : MonoBehaviour
     float coyoteTimer;
     float minimumJumpTimer;
 
+    public float interactBufferTime;
+    float interactBufferTimer;
+
     Rigidbody2D rb2d;
     public SpriteRenderer sr;
     Animator anim;
@@ -27,9 +30,9 @@ public class PlayerController : MonoBehaviour
     bool isGrounded { get { return groundcheck.IsColliding; }}
 
 
-    TotemContainer heldTotem;
+    TotemContainer heldTotemContainer;
+    public GameObject totemHoldObject;
     public Vector2 totemThrowVel;
-    public Vector2 totemHoldPosition;
 
 
     float xInput;
@@ -73,8 +76,12 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (tPressed) {
-            DoTotem();
+        interactBufferTimer = tPressed ? interactBufferTime : Helpers.Timer(interactBufferTimer);
+        if (interactBufferTimer > 0) {
+            bool didInteract = DoTotem();
+            if (didInteract) {
+                interactBufferTimer = 0;
+            }
         }
 
         anim.SetFloat("YVel", rb2d.velocity.y);
@@ -83,7 +90,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private void FixedUpdate() {
-        MovementProfile mov = heldTotem ? totemMovement : normalMovement;
+        MovementProfile mov = heldTotemContainer ? totemMovement : normalMovement;
 
         Vector2 vel = rb2d.velocity;
 
@@ -108,7 +115,6 @@ public class PlayerController : MonoBehaviour
                 moveState = MovementState.IDLE;
             }
         }
-        Debug.Log(moveState);
 
         if (moveState != MovementState.DUCK && xInput != 0) {
             // accelerate player in the direction of motion
@@ -189,25 +195,66 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    void DoTotem() {
-        if (heldTotem == null) {
+    void StartedGrab() {
+        // physics + input disabled
+
+        anim.SetTrigger("Grabbed");
+    }
+
+    void StoppedGrab() {
+        // physics + input enabled
+
+        Debug.Log("PLAYER: termination of grab animation");
+    }
+
+    void StartedThrow() {
+        anim.SetTrigger("Thrown");
+    }
+
+    void StoppedThrow() {
+        Debug.Log("PLAYER: termination of throw animation");
+    }
+
+    void StartedDrop() {
+        // physics + input disabled
+
+        anim.SetTrigger("Dropped");
+    }
+
+    void StoppedDrop() {
+        // physics + input enabled
+        // tell the TotemContainer to switch active totems at this time
+
+        Debug.Log("PLAYER: termination of drop animation");
+    }
+
+
+    // return value is whether there was a successful interaction with a totem
+    bool DoTotem() {
+        if (heldTotemContainer == null) {
             // player is trying to grab a totem
             // reject if the player can't grab in current state
-            if (!isGrounded) return;
+            if (!isGrounded) return false;
 
             // reject if there is no totem in front of the player
-            if (totemcheck.collider == null) return;
+            if (totemcheck.collider == null) return false;
 
             Totem theTotem = totemcheck.collider.GetComponent<Totem>();
             
-            heldTotem = totemcheck.collider.GetComponent<Totem>()?.parent;
-            heldTotem?.HoldTotem(transform, totemHoldPosition.ToVector3());
+            heldTotemContainer = totemcheck.collider.GetComponent<Totem>()?.parent;
+            heldTotemContainer?.HoldTotem(totemHoldObject.transform);
+
+            StartedGrab();
         }
         else {
             // totem held: release it
-            heldTotem.ReleaseTotem(totemThrowVel.WithX(totemThrowVel.x * Mathf.Sign(transform.localScale.x)));
-            heldTotem = null;
+            heldTotemContainer.ReleaseTotem(totemThrowVel.WithX(totemThrowVel.x * Mathf.Sign(transform.localScale.x)));
+            heldTotemContainer = null;
+
+            StartedThrow();
         }
+
+        return true;
     }
 
     private void Die() {
@@ -217,10 +264,6 @@ public class PlayerController : MonoBehaviour
         Destroy(gameObject);
     }
 
-
-    private void OnDrawGizmos() {
-        Gizmos.DrawWireSphere(transform.position + totemHoldPosition.ToVector3(), 0.2f);
-    }
 }
 
 

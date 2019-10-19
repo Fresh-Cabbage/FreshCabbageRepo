@@ -35,6 +35,7 @@ Transform:
   - {fileID: 1668558032738856221}
   - {fileID: 7084876449173340756}
   - {fileID: 6923446008004985240}
+  - {fileID: 6940579234723299874}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -111,12 +112,13 @@ MonoBehaviour:
     maxFallSpeed: 39
   jumpBufferTime: 0.15
   coyoteTime: 0.15
+  interactBufferTime: 0.1
   sr: {fileID: 2106555713994767617}
   groundcheck: {fileID: 5469750575001678281}
   hazardcheck: {fileID: 1504612737827210429}
   totemcheck: {fileID: 3399870243615498373}
+  totemHoldObject: {fileID: 5641538591841189161}
   totemThrowVel: {x: 5, y: 5}
-  totemHoldPosition: {x: 0, y: 1.25}
 --- !u!95 &2068722304
 Animator:
   serializedVersion: 3
@@ -291,6 +293,36 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &5641538591841189161
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6940579234723299874}
+  m_Layer: 0
+  m_Name: TotemHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6940579234723299874
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5641538591841189161}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.239, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3932474212417406063}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6187027951512748247
 GameObject:
   m_ObjectHideFlags: 0
