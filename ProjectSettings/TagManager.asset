@@ -8,6 +8,7 @@ TagManager:
   - Hazard
   - EffectRegion
   - Totem
+  - FinishScreen
   layers:
   - Default
   - TransparentFX
