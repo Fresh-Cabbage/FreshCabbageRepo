@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3383425701766995555}
   - component: {fileID: 3383425701766995548}
   - component: {fileID: 3383425701766995549}
-  - component: {fileID: 3383425701766995550}
+  - component: {fileID: 2568015194380698976}
   m_Layer: 0
   m_Name: PlaceholderSwitch
   m_TagString: Untagged
@@ -116,7 +116,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.3
---- !u!114 &3383425701766995550
+--- !u!114 &2568015194380698976
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -125,10 +125,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 3383425701766995551}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7f7e5188d0205d469a8e1398fd536c1, type: 3}
+  m_Script: {fileID: 11500000, guid: c5fcdb350b897d6499df98debceaf5b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isColliding: 0
-  collider: {fileID: 0}
-  targetTags:
-  - EffectRegion
+  targetTags: []
+  regionType: 0
+  targetTags: []

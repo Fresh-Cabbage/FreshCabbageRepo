@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class EffectRegion : MonoBehaviour
 {
-    public LineRenderer lr;
-    public float baseRadius;
+    public EffectRegionType regionType;
+
+    SpriteRenderer sr;
+
     public float maxSize;
     public float inflateSpeed;
     public float deflateTime;
@@ -15,7 +17,12 @@ public class EffectRegion : MonoBehaviour
     bool isInflating;
     bool shouldInflate;
 
+    public LineRenderer lr;
+    public float baseRadius;
+
     private void Start() {
+        sr = GetComponent<SpriteRenderer>();
+
         transform.localScale = Vector3.zero.WithZ(1);
 
         DrawCircle(baseRadius);
@@ -61,5 +68,9 @@ public class EffectRegion : MonoBehaviour
         lr.positionCount = 36;
         lr.SetPositions(points);
         lr.gameObject.SetActive(true);
+
+        // also set line renderer color
+        lr.startColor = sr.color.WithAlpha(lr.startColor.a);
+        lr.endColor = sr.color.WithAlpha(lr.endColor.a);
     }
 }

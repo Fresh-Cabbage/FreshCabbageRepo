@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8631130048647291081}
-  - component: {fileID: 6263527650345438821}
   - component: {fileID: 1682786135974251289}
+  - component: {fileID: 1007753140951137781}
   m_Layer: 0
   m_Name: EffectCheck
   m_TagString: Untagged
@@ -32,22 +32,6 @@ Transform:
   m_Father: {fileID: 3383425701766995554}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6263527650345438821
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 936369605943800071}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7f7e5188d0205d469a8e1398fd536c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isColliding: 0
-  collider: {fileID: 0}
-  targetTags:
-  - EffectRegion
 --- !u!61 &1682786135974251289
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -74,6 +58,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1007753140951137781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 936369605943800071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5fcdb350b897d6499df98debceaf5b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetTags: []
+  regionType: 0
+  targetTags: []
 --- !u!1 &3383425701766995551
 GameObject:
   m_ObjectHideFlags: 0
@@ -120,7 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d76217b10aa997945875eb98042aa7ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectCheck: {fileID: 6263527650345438821}
+  effectCheck: {fileID: 1007753140951137781}
   surface: {fileID: 744791502466639355}
   defaultState: 0
   offColor: {r: 1, g: 1, b: 1, a: 0.4627451}
@@ -165,7 +164,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 624871634d699fb4f808dc8a749d9ef6, type: 3}
-  m_Color: {r: 0.26415092, g: 0.26415092, b: 0.26415092, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.44705883}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

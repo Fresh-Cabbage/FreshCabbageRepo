@@ -5,7 +5,7 @@ using UnityEngine;
 public class OnOffPlaceholder : MonoBehaviour
 {
     SpriteRenderer sr;
-    public CollisionCheck effectCheck;
+    public EffectCheck effectCheck;
     public Collider2D surface;
 
     public bool defaultState;
@@ -21,7 +21,7 @@ public class OnOffPlaceholder : MonoBehaviour
 
     private void Update()
     {
-        sr.color = effectCheck.IsColliding ? onColor : offColor;
-        surface.enabled = effectCheck.IsColliding ? !defaultState : defaultState;
+        sr.color = effectCheck.IsColliding() ? onColor : offColor;
+        surface.enabled = effectCheck.IsColliding() ? !defaultState : defaultState;
     }
 }

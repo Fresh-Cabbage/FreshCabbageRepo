@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
     public CollisionCheck groundcheck;
     public CollisionCheck hazardcheck;
     public CollisionCheck totemcheck;
-    bool isGrounded { get { return groundcheck.IsColliding; }}
+    bool isGrounded { get { return groundcheck.IsColliding(); }}
 
 
     TotemContainer heldTotemContainer;
@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Update() {
-        if (hazardcheck.IsColliding)
+        if (hazardcheck.IsColliding())
             Die();
 
         // get inputs
@@ -237,11 +237,11 @@ public class PlayerController : MonoBehaviour
             if (!isGrounded) return false;
 
             // reject if there is no totem in front of the player
-            if (totemcheck.collider == null) return false;
+            if (!totemcheck.IsColliding()) return false;
 
-            Totem theTotem = totemcheck.collider.GetComponent<Totem>();
+            Totem theTotem = totemcheck.GetCollider().GetComponent<Totem>();
             
-            heldTotemContainer = totemcheck.collider.GetComponent<Totem>()?.parent;
+            heldTotemContainer = theTotem?.parent;
             heldTotemContainer?.HoldTotem(totemHoldObject.transform);
 
             StartedGrab();

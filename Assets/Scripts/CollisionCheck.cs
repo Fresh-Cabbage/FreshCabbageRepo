@@ -5,27 +5,55 @@ using UnityEngine;
 
 public class CollisionCheck : MonoBehaviour
 {
-    [SerializeField] private bool isColliding;
-    public bool IsColliding { get { return isColliding; }}
-
-    [HideInInspector] public new Collider2D collider; // do not depend on this to always exist if IsColliding is true - a fix for this is coming
+    protected List<Collider2D> colliders;
 
     public List<string> targetTags;
 
+
+    protected virtual void Start() {
+        Reset();
+    }
+
+    protected virtual void OnDisable() {
+        Reset();
+    }
+
+    protected void Reset() {
+        colliders = new List<Collider2D>();
+    }
+
+
+    protected virtual bool IsValid(Collider2D other) {
+        return other != null && other.enabled && targetTags.Any(tag => other.CompareTag(tag));
+    }
     
-    private void OnTriggerEnter2D(Collider2D other) {
-        if (targetTags.Any(tag => other.CompareTag(tag))) {
-            isColliding = true;
-            collider = other;
+    protected virtual void OnTriggerEnter2D(Collider2D other) {
+        if (IsValid(other)) {
+            // found a collider, add it to the list
+            colliders.Add(other);
         }
     }
 
-    private void OnTriggerStay2D(Collider2D other) => OnTriggerEnter2D(other);
+    protected virtual void OnTriggerExit2D(Collider2D other) {
+        // remove collider if preset
+        colliders.Remove(other);
+    }
 
-    private void OnTriggerExit2D(Collider2D other) {
-        if (targetTags.Any(tag => other.CompareTag(tag))) {
-            isColliding = false;
-            collider = null;
+    protected void CheckColliders() {
+        for (int c = colliders.Count - 1; c >= 0; c--) {
+            // remove any colliders that are no longer valid collisions
+            if (!IsValid(colliders[c])) {
+                colliders.RemoveAt(c);
+            }
         }
+    }
+
+    public bool IsColliding() {
+        CheckColliders();
+        return colliders.Count > 0;
+    }
+
+    public Collider2D GetCollider() {
+        return IsColliding() ? colliders[colliders.Count - 1] : null;
     }
 }

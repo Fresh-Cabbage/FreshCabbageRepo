@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlaceholderSwitch : MonoBehaviour
 {
     SpriteRenderer sr;
-    CollisionCheck effectCheck;
+    EffectCheck effectCheck;
     public GameObject door;
 
     public bool defaultState;
@@ -16,11 +16,11 @@ public class PlaceholderSwitch : MonoBehaviour
     private void Start()
     {
         sr = GetComponent<SpriteRenderer>();
-        effectCheck = GetComponent<CollisionCheck>();
+        effectCheck = GetComponent<EffectCheck>();
     }
 
     private void Update() {
-        sr.color = effectCheck.IsColliding ? onColor : offColor;
-        door.SetActive(effectCheck.IsColliding ? !defaultState : defaultState);
+        sr.color = effectCheck.IsColliding() ? onColor : offColor;
+        door.SetActive(effectCheck.IsColliding() ? !defaultState : defaultState);
     }
 }
