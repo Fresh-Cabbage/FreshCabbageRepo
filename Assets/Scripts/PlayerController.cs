@@ -7,6 +7,10 @@ public class PlayerController : MonoBehaviour
     public MovementProfile normalMovement;
     public MovementProfile totemMovement;
 
+    [Range(1, 2)]
+    public int maxJumps;
+    int numJumpsUsed;
+
     public float rollSpeed;
     public float rollTime;
     float rollTimer;
@@ -48,7 +52,6 @@ public class PlayerController : MonoBehaviour
     bool oldTInput;
     bool dInput;
 
-    bool doubleJumped;
     bool tPressed { get { return tInput && !oldTInput; }}
 
     
@@ -59,7 +62,7 @@ public class PlayerController : MonoBehaviour
     private void Start() {
         rb2d = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-    
+
         baseGravity = rb2d.gravityScale;
     }
 
@@ -159,9 +162,13 @@ public class PlayerController : MonoBehaviour
         minimumJumpTimer = Helpers.FixedTimer(minimumJumpTimer);
 
         // we know the player should jump if both timers are active simultaneously
-        if (jumpBufferTimer > 0 && coyoteTimer > 0 && moveState.CanGoToJump()) {
+        if (jumpBufferTimer > 0 && coyoteTimer > 0 && moveState.CanGoToJump() && numJumpsUsed == 0) {
             vel.y = mov.jumpPower;
-            StartedJump();
+            StartedJump(1);
+        }
+        else if (coyoteTimer == 0 && jumpBufferTimer > 0 && moveState.CanGoToJump()) {
+            vel.y = mov.jumpPower;
+            StartedJump(2);
         }
 
         if (minimumJumpTimer == 0 && moveState == MovementState.JUMP && (!jInput || rb2d.velocity.y < 0.2f)) {
@@ -170,18 +177,6 @@ public class PlayerController : MonoBehaviour
             vel.y /= 2;
         }
 
-        
-        if (isGrounded)
-        {
-            doubleJumped = false;
-        }
-        //allows for double jump
-        else if (moveState == MovementState.FALL && !doubleJumped && jInput)
-        {
-            vel.y = mov.jumpPower;
-            StartedJump();
-            doubleJumped = true;
-        }
 
         vel.y = Mathf.Max(vel.y, -mov.maxFallSpeed);
 
@@ -192,6 +187,7 @@ public class PlayerController : MonoBehaviour
             if ((moveState == MovementState.JUMP && minimumJumpTimer == 0) || moveState == MovementState.FALL) {
                 // player has landed
                 moveState = MovementState.IDLE;
+                numJumpsUsed = 0;
             }
         }
         else if (vel.y < mov.maxFallSpeed) {
@@ -217,8 +213,14 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    void StartedJump() {
+    void StartedJump(int jumpNum) {
         moveState = MovementState.JUMP;
+
+        // consume a jump
+        numJumpsUsed = jumpNum;
+
+        // reset gravity
+        rb2d.gravityScale = baseGravity;
 
         // start minimum jump timer
         minimumJumpTimer = 0.02f;
@@ -228,7 +230,7 @@ public class PlayerController : MonoBehaviour
         coyoteTimer = 0;
 
         // set anim trigger
-        anim.SetTrigger("Jumped");
+        anim.SetTrigger(jumpNum == 1 ? "Jumped" : "DoubleJumped");
     }
 
     void StartedRoll() {

@@ -110,6 +110,7 @@ MonoBehaviour:
     jumpPower: 11
     verticalJerk: 0.3
     maxFallSpeed: 39
+  maxJumps: 2
   rollSpeed: 20
   rollTime: 0.3
   jumpBufferTime: 0.15
