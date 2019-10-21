@@ -110,6 +110,8 @@ MonoBehaviour:
     jumpPower: 11
     verticalJerk: 0.3
     maxFallSpeed: 39
+  rollSpeed: 20
+  rollTime: 0.3
   jumpBufferTime: 0.15
   coyoteTime: 0.15
   interactBufferTime: 0.1
@@ -208,8 +210,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7f7e5188d0205d469a8e1398fd536c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isColliding: 0
-  collider: {fileID: 0}
   targetTags:
   - Totem
 --- !u!1 &3275484373318084007
@@ -424,8 +424,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7f7e5188d0205d469a8e1398fd536c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isColliding: 0
-  collider: {fileID: 0}
   targetTags:
   - Ground
   - Totem
@@ -499,7 +497,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7f7e5188d0205d469a8e1398fd536c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isColliding: 0
-  collider: {fileID: 0}
   targetTags:
   - Hazard

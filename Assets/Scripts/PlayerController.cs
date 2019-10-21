@@ -7,6 +7,9 @@ public class PlayerController : MonoBehaviour
     public MovementProfile normalMovement;
     public MovementProfile totemMovement;
 
+    public float rollSpeed;
+    public float rollTime;
+
     MovementState moveState;
 
     float baseGravity;
@@ -37,8 +40,10 @@ public class PlayerController : MonoBehaviour
 
     float xInput;
     bool jInput;
+    bool rInput;
     bool tInput;
     bool oldJInput;
+    bool oldRInput;
     bool oldTInput;
     bool dInput;
 
@@ -64,6 +69,7 @@ public class PlayerController : MonoBehaviour
         xInput = Input.GetAxisRaw("Horizontal");
         jInput = Input.GetAxisRaw("Jump") > 0;
         dInput = Input.GetAxisRaw("Vertical") < 0;
+        rInput = Input.GetAxisRaw("Roll") > 0;
 
         oldTInput = tInput;
         tInput = Input.GetAxisRaw("Interact") > 0;
@@ -173,10 +179,31 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+
+        // roll check
+        if (rInput && !oldRInput && moveState.CanGoToRoll() && heldTotemContainer == null) {
+            StartedRoll();
+        }
+
         rb2d.velocity = vel;
 
-        // indicate that we have used the current jump input
+        // indicate that we have used some of the inputs
         oldJInput = jInput;
+        oldRInput = rInput;
+    }
+
+    private IEnumerator DoBoost(Vector2 boostVel, float sustainTime) {
+        float sustainTimer = sustainTime;
+        while (sustainTimer > 0) {
+            Vector2 vel = rb2d.velocity;
+            vel.x = boostVel.x;
+            rb2d.velocity = vel;
+
+            yield return new WaitForSeconds(Time.fixedDeltaTime);
+            sustainTimer -= Time.fixedDeltaTime;
+        }
+
+        moveState = MovementState.IDLE;
     }
 
 
@@ -192,6 +219,12 @@ public class PlayerController : MonoBehaviour
 
         // set anim trigger
         anim.SetTrigger("Jumped");
+    }
+
+    void StartedRoll() {
+        moveState = MovementState.ROLL;
+        StartCoroutine(DoBoost(transform.right * transform.localScale.x * rollSpeed, rollTime));
+        anim.SetTrigger("Rolled");
     }
 
 
@@ -263,6 +296,7 @@ public class PlayerController : MonoBehaviour
 
         Destroy(gameObject);
     }
+
 
 }
 
