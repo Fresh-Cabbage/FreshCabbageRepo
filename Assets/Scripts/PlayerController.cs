@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 
     public float rollSpeed;
     public float rollTime;
+    float rollTimer;
 
     MovementState moveState;
 
@@ -122,7 +123,16 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (moveState != MovementState.DUCK && xInput != 0) {
+        if (moveState == MovementState.ROLL) {
+            // player should have roll velocity
+            vel.x = transform.localScale.x * rollSpeed;
+            
+            rollTimer = Helpers.Timer(rollTimer);
+            if (rollTimer == 0) {
+                moveState = MovementState.WALK;
+            }
+        }
+        else if (moveState != MovementState.DUCK && xInput != 0) {
             // accelerate player in the direction of motion
             vel.x += xInput * mov.xAccel;
             vel.x = Mathf.Clamp(vel.x, -mov.maxXSpeed, mov.maxXSpeed);
@@ -192,20 +202,6 @@ public class PlayerController : MonoBehaviour
         oldRInput = rInput;
     }
 
-    private IEnumerator DoBoost(Vector2 boostVel, float sustainTime) {
-        float sustainTimer = sustainTime;
-        while (sustainTimer > 0) {
-            Vector2 vel = rb2d.velocity;
-            vel.x = boostVel.x;
-            rb2d.velocity = vel;
-
-            yield return new WaitForSeconds(Time.fixedDeltaTime);
-            sustainTimer -= Time.fixedDeltaTime;
-        }
-
-        moveState = MovementState.IDLE;
-    }
-
 
     void StartedJump() {
         moveState = MovementState.JUMP;
@@ -223,7 +219,7 @@ public class PlayerController : MonoBehaviour
 
     void StartedRoll() {
         moveState = MovementState.ROLL;
-        StartCoroutine(DoBoost(transform.right * transform.localScale.x * rollSpeed, rollTime));
+        rollTimer = rollTime;
         anim.SetTrigger("Rolled");
     }
 
