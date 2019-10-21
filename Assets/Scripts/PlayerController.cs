@@ -123,7 +123,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (moveState == MovementState.ROLL) {
+        if (rollTimer > 0) {
             // player should have roll velocity
             vel.x = transform.localScale.x * rollSpeed;
             
