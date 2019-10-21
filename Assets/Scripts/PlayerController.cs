@@ -48,6 +48,7 @@ public class PlayerController : MonoBehaviour
     bool oldTInput;
     bool dInput;
 
+    bool doubleJumped;
     bool tPressed { get { return tInput && !oldTInput; }}
 
     
@@ -167,6 +168,19 @@ public class PlayerController : MonoBehaviour
             // player's jump has terminated (either by releasing the jump button or by starting to move down)
             moveState = MovementState.FALL;
             vel.y /= 2;
+        }
+
+        
+        if (isGrounded)
+        {
+            doubleJumped = false;
+        }
+        //allows for double jump
+        else if (moveState == MovementState.FALL && !doubleJumped && jInput)
+        {
+            vel.y = mov.jumpPower;
+            StartedJump();
+            doubleJumped = true;
         }
 
         vel.y = Mathf.Max(vel.y, -mov.maxFallSpeed);
