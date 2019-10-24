@@ -166,7 +166,7 @@ public class PlayerController : MonoBehaviour
             vel.y = mov.jumpPower;
             StartedJump(1);
         }
-        else if (coyoteTimer == 0 && jumpBufferTimer > 0 && moveState.CanGoToJump()) {
+        else if (maxJumps == 2 && numJumpsUsed != 2 && coyoteTimer == 0 && jumpBufferTimer > 0 && moveState.CanGoToJump()) {
             vel.y = mov.jumpPower;
             StartedJump(2);
         }
