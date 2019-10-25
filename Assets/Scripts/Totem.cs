@@ -10,9 +10,9 @@ public class Totem : MonoBehaviour
     public float massThrown = 10f;
     public float gravityScaleThrown = 3f;
     public float linearDragThrown = 0.9f;
-    public float massGrounded = 10f;
-    public float gravityScaleGrounded = 3f;
-    public float linearDragGrounded = 0.9f;
+    public float massGrounded = 2f;
+    public float gravityScaleGrounded = 2.2f;
+    public float linearDragGrounded = 0.1f;
 
     [HideInInspector] public TotemContainer parent;
     [HideInInspector] public bool isHeld;
