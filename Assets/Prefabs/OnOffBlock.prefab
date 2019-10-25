@@ -71,8 +71,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTags: []
-  regionType: 0
-  targetTags: []
+  regionType: 1
 --- !u!1 &3383425701766995551
 GameObject:
   m_ObjectHideFlags: 0
@@ -122,8 +121,8 @@ MonoBehaviour:
   effectCheck: {fileID: 1007753140951137781}
   surface: {fileID: 744791502466639355}
   defaultState: 0
-  offColor: {r: 1, g: 1, b: 1, a: 0.4627451}
-  onColor: {r: 1, g: 1, b: 1, a: 1}
+  offColor: {r: 0.23137255, g: 1, b: 0.32156864, a: 0.4627451}
+  onColor: {r: 0.23113209, g: 1, b: 0.32065088, a: 1}
 --- !u!212 &3383425701766995548
 SpriteRenderer:
   m_ObjectHideFlags: 0

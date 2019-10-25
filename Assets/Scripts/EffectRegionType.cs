@@ -2,9 +2,10 @@ using UnityEngine;
 
 public enum EffectRegionType {
     ELECTRIC,
+    GROWTH,
     TIME,
-    REFLECT,
-    WIN
+    WIN,
+    UNKNOWN
 }
 
 public static class EffectRegionTypeExtensions {
