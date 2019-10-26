@@ -61,6 +61,8 @@ public class PlayerController : MonoBehaviour
     
     // events!
     public delegate void PlayerAction();
+    public static PlayerAction OnStartRoll;
+    public static PlayerAction OnStopRoll;
     public static PlayerAction OnDeath;
 
     private void Start() {
@@ -246,12 +248,16 @@ public class PlayerController : MonoBehaviour
         anim.SetTrigger("Rolled");
 
         gameObject.layer = rollingPhysicsLayer;
+
+        OnStartRoll?.Invoke();
     }
 
     void StoppedRoll() {
         moveState = MovementState.WALK;
 
         gameObject.layer = defaultPhysicsLayer;
+
+        OnStopRoll?.Invoke();
     }
 
 

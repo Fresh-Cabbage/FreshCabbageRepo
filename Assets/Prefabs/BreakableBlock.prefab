@@ -84,9 +84,9 @@ GameObject:
   - component: {fileID: 3316842790301982185}
   - component: {fileID: 3316842790301982186}
   - component: {fileID: 3316842790301982187}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: BreakableBlock
-  m_TagString: Ground
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -168,7 +168,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_UsedByComposite: 1
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
