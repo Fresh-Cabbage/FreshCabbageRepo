@@ -64,6 +64,8 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
 
         baseGravity = rb2d.gravityScale;
+
+        gameObject.layer = LayerMask.NameToLayer("Player");
     }
 
     private void Update() {
@@ -133,7 +135,7 @@ public class PlayerController : MonoBehaviour
             
             rollTimer = Helpers.Timer(rollTimer);
             if (rollTimer == 0) {
-                moveState = MovementState.WALK;
+                StoppedRoll();
             }
         }
         else if (moveState != MovementState.DUCK && xInput != 0) {
@@ -237,6 +239,14 @@ public class PlayerController : MonoBehaviour
         moveState = MovementState.ROLL;
         rollTimer = rollTime;
         anim.SetTrigger("Rolled");
+
+        gameObject.layer = LayerMask.NameToLayer("PlayerRoll");
+    }
+
+    void StoppedRoll() {
+        moveState = MovementState.WALK;
+
+        gameObject.layer = LayerMask.NameToLayer("Player");
     }
 
 
