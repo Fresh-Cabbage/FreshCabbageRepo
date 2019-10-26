@@ -42,6 +42,10 @@ public class PlayerController : MonoBehaviour
     public GameObject totemHoldObject;
     public Vector2 totemThrowVel;
 
+    
+    int defaultPhysicsLayer;
+    int rollingPhysicsLayer;
+
 
     float xInput;
     bool jInput;
@@ -65,7 +69,8 @@ public class PlayerController : MonoBehaviour
 
         baseGravity = rb2d.gravityScale;
 
-        gameObject.layer = LayerMask.NameToLayer("Player");
+        defaultPhysicsLayer = gameObject.layer;
+        rollingPhysicsLayer = gameObject.layer + 1;
     }
 
     private void Update() {
@@ -240,13 +245,13 @@ public class PlayerController : MonoBehaviour
         rollTimer = rollTime;
         anim.SetTrigger("Rolled");
 
-        gameObject.layer = LayerMask.NameToLayer("PlayerRoll");
+        gameObject.layer = rollingPhysicsLayer;
     }
 
     void StoppedRoll() {
         moveState = MovementState.WALK;
 
-        gameObject.layer = LayerMask.NameToLayer("Player");
+        gameObject.layer = defaultPhysicsLayer;
     }
 
 
