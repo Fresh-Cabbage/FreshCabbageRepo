@@ -2,26 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TrampolineCheck : MonoBehaviour
+public class Trampoline : MonoBehaviour
 {
-    public float bounceStrength = 5f;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-     
-    }
+    public float bounceStrength;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Rigidbody2D rb;
         if (collision.CompareTag("Player") || collision.CompareTag("Totem"))
         {
             GameObject other = collision.gameObject;
 
-            rb = other.GetComponent<Rigidbody2D>();
-
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y + bounceStrength);
+            Rigidbody2D rb2d = other.GetComponent<Rigidbody2D>();
+            rb2d.velocity = new Vector2(rb2d.velocity.x, bounceStrength);
         }
     }
 } //Fun fact: Unity makes me angy.
