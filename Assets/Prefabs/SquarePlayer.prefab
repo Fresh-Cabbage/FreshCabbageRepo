@@ -101,7 +101,7 @@ MonoBehaviour:
   normalMovement:
     maxXSpeed: 7
     xAccel: 5
-    jumpPower: 15
+    jumpPower: 12
     verticalJerk: 0.3
     maxFallSpeed: 39
   totemMovement:
