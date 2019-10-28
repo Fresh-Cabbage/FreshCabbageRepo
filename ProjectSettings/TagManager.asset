@@ -9,6 +9,7 @@ TagManager:
   - EffectRegion
   - Totem
   - FinishScreen
+  - RollHitbox
   layers:
   - Default
   - TransparentFX

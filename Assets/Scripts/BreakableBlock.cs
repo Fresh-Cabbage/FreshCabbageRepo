@@ -5,16 +5,42 @@ using UnityEngine;
 public class BreakableBlock : MonoBehaviour
 {
     public CollisionCheck playerCheck;
+    new Collider2D collider;
+
+    public float freezeTime;
+    public float breakDelay;
+
+    bool destroyed;
+
+    public Material white;
+
+    private void Start() {
+        collider = GetComponent<Collider2D>();
+    }
 
     private void Update() {
-        GameObject player = playerCheck.GetCollider()?.gameObject;
-        if (player != null && player.layer == LayerMask.NameToLayer("PlayerRoll") && Mathf.Abs(player.transform.position.y - transform.position.y) <= 0.25f)
-            Break();
+        if (!destroyed && playerCheck.IsColliding()) {
+            StartCoroutine(Break());
+        }
     }
 
 
-    private void Break() {
-        // have a brief delay before actually breaking so that it looks as if the player goes slightly into the block before destroying it
-        Destroy(gameObject, 0.02f);
+    private IEnumerator Break() {
+        destroyed = true;
+
+        // disable this collision
+        collider.enabled = false;
+
+        yield return new WaitForSeconds(breakDelay);
+
+        GetComponent<SpriteRenderer>().material = white;
+        
+        // freeze frame
+        Time.timeScale = 0;
+        yield return new WaitForSecondsRealtime(freezeTime);
+        Time.timeScale = 1;
+
+        // finally, destroy this
+        Destroy(gameObject);
     }
 }

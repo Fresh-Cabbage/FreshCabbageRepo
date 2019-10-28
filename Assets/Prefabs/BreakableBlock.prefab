@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTags:
-  - Player
+  - RollHitbox
 --- !u!61 &3316842789752824248
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -195,3 +195,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCheck: {fileID: 3316842789752824255}
+  freezeTime: 0.07
+  breakDelay: 0.02
+  white: {fileID: 2100000, guid: d52ee20e44cd99a45946eed7854d3ad4, type: 2}

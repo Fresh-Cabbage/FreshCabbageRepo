@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// script is outdated!
 public class BreakableBlockContainer : MonoBehaviour
 {
     PlatformEffector2D effector;

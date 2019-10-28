@@ -37,6 +37,8 @@ public class PlayerController : MonoBehaviour
     public CollisionCheck totemcheck;
     bool isGrounded { get { return groundcheck.IsColliding(); }}
 
+    public GameObject rollHitbox;
+
 
     TotemContainer heldTotemContainer;
     public GameObject totemHoldObject;
@@ -110,6 +112,17 @@ public class PlayerController : MonoBehaviour
     }
 
     private void FixedUpdate() {
+        HandleMotion();
+
+        rollHitbox.SetActive(isGrounded && moveState == MovementState.ROLL);
+
+        // indicate that we have used some of the inputs
+        oldJInput = jInput;
+        oldRInput = rInput;
+    }
+
+
+    void HandleMotion() {
         MovementProfile mov = heldTotemContainer ? totemMovement : normalMovement;
 
         Vector2 vel = rb2d.velocity;
@@ -215,10 +228,6 @@ public class PlayerController : MonoBehaviour
         }
 
         rb2d.velocity = vel;
-
-        // indicate that we have used some of the inputs
-        oldJInput = jInput;
-        oldRInput = rInput;
     }
 
 
