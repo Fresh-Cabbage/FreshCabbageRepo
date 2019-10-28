@@ -71,7 +71,7 @@ PrefabInstance:
     - target: {fileID: 6604639847181484424, guid: 1826a5602d52e9647882b7900a2c2b0f,
         type: 3}
       propertyPath: m_Name
-      value: Totem (Unheld) Variant
+      value: Totem (Default Unheld)
       objectReference: {fileID: 0}
     - target: {fileID: 5680967643386254334, guid: 1826a5602d52e9647882b7900a2c2b0f,
         type: 3}

@@ -70,12 +70,13 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: 75c79ecaab025af4aa6afe2e69c4603f, type: 3}
+  m_Sprite: {fileID: -5808961178615454402, guid: 75c79ecaab025af4aa6afe2e69c4603f,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.75, y: 1.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -93,7 +94,7 @@ GameObject:
   - component: {fileID: 5680967643386254334}
   - component: {fileID: 4894606828287497393}
   m_Layer: 0
-  m_Name: Totem (Held)
+  m_Name: Totem (Default Held)
   m_TagString: Totem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -152,12 +153,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be8ec3016c628844ca257d877f6dd3da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  massThrown: 10
-  gravityScaleThrown: 3
-  linearDragThrown: 0.9
-  massGrounded: 2
-  gravityScaleGrounded: 2.2
-  linearDragGrounded: 0.1
+  groundedProfile:
+    mass: 10
+    gravityScale: 3
+    linearDrag: 0.9
+  thrownProfile:
+    mass: 2
+    gravityScale: 2.2
+    linearDrag: 0.1
   parent: {fileID: 0}
   isHeld: 0
   rb2d: {fileID: 0}

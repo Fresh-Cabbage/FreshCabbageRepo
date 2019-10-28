@@ -47,6 +47,16 @@ public class TotemContainer : MonoBehaviour
         transform.SetParent(newParent);
 
         SetEffectRegionState();
+
+        if (effectRegion.regionType == EffectRegionType.WIN) {
+            // the player wins by grabbing this totem!
+            LevelFinisher finish = GetComponent<LevelFinisher>();
+
+            if (finish == null)
+                Debug.LogError("This is a win totem but there is no LevelFinisher attached!");
+
+            finish?.FinishLevel();
+        }
     }
 
     public void ReleaseTotem(Vector2 throwDirection) {

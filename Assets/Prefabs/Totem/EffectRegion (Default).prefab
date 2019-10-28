@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 5379503573933987609}
   - component: {fileID: 674872444869853035}
   m_Layer: 0
-  m_Name: EffectRegion
+  m_Name: EffectRegion (Default)
   m_TagString: EffectRegion
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -206,7 +206,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: a70a8486d838973408ae6000c0b7f33f, type: 3}
-  m_Color: {r: 1, g: 0.9241097, b: 0.4198113, a: 0.34117648}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.34117648}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -244,11 +244,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb61ef5773111924ca4b0d3423c19826, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lr: {fileID: 1513700271968013550}
-  baseRadius: 0.5
+  regionType: 4
   maxSize: 8
   inflateSpeed: 0.2
   deflateTime: 10
+  lr: {fileID: 1513700271968013550}
+  baseRadius: 0.5
 --- !u!50 &674872444869853035
 Rigidbody2D:
   serializedVersion: 4

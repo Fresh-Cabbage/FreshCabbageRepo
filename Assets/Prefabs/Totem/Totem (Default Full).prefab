@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9159489328564819609}
   - component: {fileID: 9159489328564819608}
   m_Layer: 0
-  m_Name: TotemContainer
+  m_Name: Totem (Default Full)
   m_TagString: Totem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57,11 +57,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9159489328564819609}
     m_Modifications:
-    - target: {fileID: 293545722598851632, guid: c0e0bee99b3865046a5b20cd2967d355,
-        type: 3}
-      propertyPath: m_Name
-      value: Totem (Unheld)
-      objectReference: {fileID: 0}
     - target: {fileID: 4870037113221994076, guid: c0e0bee99b3865046a5b20cd2967d355,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -116,6 +111,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 293545722598851632, guid: c0e0bee99b3865046a5b20cd2967d355,
+        type: 3}
+      propertyPath: m_Name
+      value: Totem (Unheld)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0e0bee99b3865046a5b20cd2967d355, type: 3}
@@ -231,16 +231,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9159489328564819609}
     m_Modifications:
-    - target: {fileID: 6604639847181484424, guid: 1826a5602d52e9647882b7900a2c2b0f,
-        type: 3}
-      propertyPath: m_Name
-      value: Totem (Held)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6604639847181484424, guid: 1826a5602d52e9647882b7900a2c2b0f,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2030945613870486500, guid: 1826a5602d52e9647882b7900a2c2b0f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -294,6 +284,16 @@ PrefabInstance:
     - target: {fileID: 2030945613870486500, guid: 1826a5602d52e9647882b7900a2c2b0f,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6604639847181484424, guid: 1826a5602d52e9647882b7900a2c2b0f,
+        type: 3}
+      propertyPath: m_Name
+      value: Totem (Held)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6604639847181484424, guid: 1826a5602d52e9647882b7900a2c2b0f,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
