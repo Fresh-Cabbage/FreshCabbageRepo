@@ -72,6 +72,11 @@ PrefabInstance:
       propertyPath: regionType
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8872833850455509696, guid: e971a2249b09fd446a78f9d17a4a76e0,
+        type: 3}
+      propertyPath: color.b
+      value: 0.46666667
+      objectReference: {fileID: 0}
     - target: {fileID: 2631449080250847820, guid: e971a2249b09fd446a78f9d17a4a76e0,
         type: 3}
       propertyPath: m_Color.r

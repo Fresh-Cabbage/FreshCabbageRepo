@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26cd883459cac4b71a182db68669deeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  finishScreen: {fileID: 0}
 --- !u!1001 &5191790023435714096
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -94,6 +93,16 @@ PrefabInstance:
         type: 3}
       propertyPath: inflateSpeed
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8872833850455509696, guid: e971a2249b09fd446a78f9d17a4a76e0,
+        type: 3}
+      propertyPath: color.g
+      value: 0.72156864
+      objectReference: {fileID: 0}
+    - target: {fileID: 8872833850455509696, guid: e971a2249b09fd446a78f9d17a4a76e0,
+        type: 3}
+      propertyPath: color.b
+      value: 0.46666667
       objectReference: {fileID: 0}
     - target: {fileID: 2631449080250847820, guid: e971a2249b09fd446a78f9d17a4a76e0,
         type: 3}

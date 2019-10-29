@@ -49,7 +49,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d52ee20e44cd99a45946eed7854d3ad4, type: 2}
+  - {fileID: 2100000, guid: ac89f28da59e4534daf9d65bd6c7db24, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -250,6 +250,7 @@ MonoBehaviour:
   deflateTime: 10
   lr: {fileID: 1513700271968013550}
   baseRadius: 0.5
+  color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!50 &674872444869853035
 Rigidbody2D:
   serializedVersion: 4

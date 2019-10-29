@@ -20,12 +20,15 @@ public class EffectRegion : MonoBehaviour
     public LineRenderer lr;
     public float baseRadius;
 
+    public Color color;
+
     private void Start() {
         sr = GetComponent<SpriteRenderer>();
 
         transform.localScale = Vector3.zero.WithZ(1);
 
-        DrawCircle(baseRadius);
+        if (lr != null)
+            DrawCircle(baseRadius);
     }
 
     private void FixedUpdate() {
@@ -70,7 +73,7 @@ public class EffectRegion : MonoBehaviour
         lr.gameObject.SetActive(true);
 
         // also set line renderer color
-        lr.startColor = sr.color.WithAlpha(lr.startColor.a);
-        lr.endColor = sr.color.WithAlpha(lr.endColor.a);
+        lr.startColor = color.WithAlpha(lr.startColor.a);
+        lr.endColor = color.WithAlpha(lr.endColor.a);
     }
 }
