@@ -286,11 +286,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Main Camera
       objectReference: {fileID: 0}
-    - target: {fileID: 9063189110797850374, guid: acba85a3032032c4bace0a8dd1adf994,
-        type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 9063189110797850372, guid: acba85a3032032c4bace0a8dd1adf994,
         type: 3}
       propertyPath: field of view
@@ -321,10 +316,10 @@ PrefabInstance:
       propertyPath: far clip plane
       value: 5000
       objectReference: {fileID: 0}
-    - target: {fileID: 9063189110797850372, guid: acba85a3032032c4bace0a8dd1adf994,
+    - target: {fileID: 9063189110797850374, guid: acba85a3032032c4bace0a8dd1adf994,
         type: 3}
-      propertyPath: orthographic size
-      value: 10
+      propertyPath: player
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: acba85a3032032c4bace0a8dd1adf994, type: 3}
