@@ -60,7 +60,7 @@ GameObject:
   - component: {fileID: 7423186580127555986}
   - component: {fileID: 3806373347911157622}
   m_Layer: 0
-  m_Name: Ground
+  m_Name: TIlemap Ground
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -241,7 +241,7 @@ GameObject:
   - component: {fileID: 5487277691960181174}
   - component: {fileID: 6820966372086677511}
   m_Layer: 0
-  m_Name: Tilemap
+  m_Name: Tilemap Hazards
   m_TagString: Hazard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

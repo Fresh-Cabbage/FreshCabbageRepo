@@ -195,6 +195,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCheck: {fileID: 3316842789752824255}
-  freezeTime: 0.07
+  freezeTime: 0.04
   breakDelay: 0.02
   white: {fileID: 2100000, guid: d52ee20e44cd99a45946eed7854d3ad4, type: 2}
