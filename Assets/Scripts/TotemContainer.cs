@@ -7,6 +7,7 @@ public class TotemContainer : MonoBehaviour
     public Totem held;
     public Totem unheld;
     public EffectRegion effectRegion;
+    public List<GameObject> objectsUnderTotem;
 
     public bool isHeld;
 
@@ -17,19 +18,24 @@ public class TotemContainer : MonoBehaviour
         held.parent = this;
         unheld.parent = this;
 
+        SetParents();
         SetEffectRegionState();
+    }
+
+
+    private void SetParents() {
+        foreach (GameObject g in objectsUnderTotem) {
+            g.transform.SetParent(isHeld ? held.transform : unheld.transform);
+            g.transform.localPosition = Vector3.zero;
+        }
     }
 
     private void SetEffectRegionState() {
         if (isHeld) {
             effectRegion.Inflate();
-            effectRegion.transform.SetParent(held.transform);
         } else {
             effectRegion.Deflate();
-            effectRegion.transform.SetParent(unheld.transform);
         }
-
-        effectRegion.transform.localPosition = Vector3.zero;
     }
 
     public void HoldTotem(Transform newParent) {
@@ -46,6 +52,7 @@ public class TotemContainer : MonoBehaviour
         transform.position = newParent.position;
         transform.SetParent(newParent);
 
+        SetParents();
         SetEffectRegionState();
 
         if (effectRegion.regionType == EffectRegionType.WIN) {
@@ -74,6 +81,7 @@ public class TotemContainer : MonoBehaviour
         transform.SetParent(null);
         unheld.Throw(throwDirection);
 
+        SetParents();
         SetEffectRegionState();
     }
 }

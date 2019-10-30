@@ -49,6 +49,8 @@ MonoBehaviour:
   held: {fileID: 1146648000383835190}
   unheld: {fileID: 4391055788630128035}
   effectRegion: {fileID: 8872833850455509696}
+  objectsUnderTotem:
+  - {fileID: 2631449080250847818}
   isHeld: 0
 --- !u!1001 &2353005146990716074
 PrefabInstance:
@@ -206,6 +208,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32b6780a884064a48a17ae446583f155, type: 3}
+--- !u!1 &2631449080250847818 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1513700273054322579, guid: 32b6780a884064a48a17ae446583f155,
+    type: 3}
+  m_PrefabInstance: {fileID: 3568388708374797785}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2631449080250847821 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1513700273054322580, guid: 32b6780a884064a48a17ae446583f155,
@@ -218,7 +226,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 3568388708374797785}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 2631449080250847818}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fb61ef5773111924ca4b0d3423c19826, type: 3}
