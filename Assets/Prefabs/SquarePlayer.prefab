@@ -126,6 +126,8 @@ MonoBehaviour:
   rollHitbox: {fileID: 608269929398213313}
   totemHoldObject: {fileID: 5641538591841189161}
   totemThrowVel: {x: 5, y: 5}
+  physicsOn: 0
+  canInput: 0
 --- !u!95 &2068722304
 Animator:
   serializedVersion: 3
@@ -247,7 +249,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.6178794, y: 0}
+  m_Offset: {x: 0.59770775, y: 0.0040358305}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -258,7 +260,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.20616817, y: 0.7461689}
+  m_Size: {x: 0.44016075, y: 1.0125214}
   m_EdgeRadius: 0
 --- !u!114 &3399870243615498373
 MonoBehaviour:

@@ -45,6 +45,9 @@ public class PlayerController : MonoBehaviour
     public GameObject totemHoldObject;
     public Vector2 totemThrowVel;
 
+    public bool physicsOn;
+    public bool canInput;
+    Vector2 previousVelocity;
 
     float xInput;
     bool jInput;
@@ -65,6 +68,9 @@ public class PlayerController : MonoBehaviour
     public static PlayerAction OnDeath;
 
     private void Start() {
+        physicsOn = true;
+        canInput = true;
+
         rb2d = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
 
@@ -92,12 +98,8 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        interactBufferTimer = tPressed ? interactBufferTime : Helpers.Timer(interactBufferTimer);
-        if (interactBufferTimer > 0) {
-            bool didInteract = DoTotem();
-            if (didInteract) {
-                interactBufferTimer = 0;
-            }
+        if (canInput) {
+            HandleInteractions();
         }
 
         anim.SetFloat("YVel", rb2d.velocity.y);
@@ -106,7 +108,9 @@ public class PlayerController : MonoBehaviour
     }
 
     private void FixedUpdate() {
-        HandleMotion();
+        if (physicsOn) {
+            HandleMotion();
+        }
 
         rollHitbox.SetActive(isGrounded && moveState == MovementState.ROLL);
 
@@ -115,6 +119,16 @@ public class PlayerController : MonoBehaviour
         oldRInput = rInput;
     }
 
+
+    void HandleInteractions() {
+        interactBufferTimer = tPressed ? interactBufferTime : Helpers.Timer(interactBufferTimer);
+        if (interactBufferTimer > 0) {
+            bool didInteract = DoTotem();
+            if (didInteract) {
+                interactBufferTimer = 0;
+            }
+        }
+    }
 
     void HandleMotion() {
         MovementProfile mov = CurrentMovement;
@@ -193,9 +207,6 @@ public class PlayerController : MonoBehaviour
             vel.y /= 2;
         }
 
-
-        vel.y = Mathf.Max(vel.y, -mov.maxFallSpeed);
-
         if (isGrounded) {
             // player is not falling, so set gravity scale to base level
             rb2d.gravityScale = baseGravity;
@@ -215,6 +226,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        vel.y = Mathf.Max(vel.y, -mov.maxFallSpeed);
 
         // roll check
         if (rInput && !oldRInput && moveState.CanGoToRoll() && heldTotemContainer == null) {
@@ -267,12 +279,22 @@ public class PlayerController : MonoBehaviour
 
     void StartedGrab() {
         // physics + input disabled
+        physicsOn = false;
+        previousVelocity = rb2d.velocity;
+        rb2d.velocity = Vector2.zero;
+        rb2d.isKinematic = true;
+        canInput = false;
 
         anim.SetTrigger("Grabbed");
     }
 
     void StoppedGrab() {
         // physics + input enabled
+        physicsOn = true;
+        rb2d.isKinematic = false;
+        rb2d.velocity = previousVelocity;
+        rb2d.gravityScale /= 2;
+        canInput = true;
 
         Debug.Log("PLAYER: termination of grab animation");
     }
@@ -302,10 +324,6 @@ public class PlayerController : MonoBehaviour
     // return value is whether there was a successful interaction with a totem
     bool DoTotem() {
         if (heldTotemContainer == null) {
-            // player is trying to grab a totem
-            // reject if the player can't grab in current state
-            if (!isGrounded) return false;
-
             // reject if there is no totem in front of the player
             if (!totemcheck.IsColliding()) return false;
 

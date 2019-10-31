@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -18570,16 +18570,6 @@ PrefabInstance:
         type: 3}
       propertyPath: totemThrowSpeed
       value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 6259706872622238908, guid: 80e6ef12ff04cd7409ee34dda96e90eb,
-        type: 3}
-      propertyPath: totemThrowVel.y
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6259706872622238908, guid: 80e6ef12ff04cd7409ee34dda96e90eb,
-        type: 3}
-      propertyPath: totemThrowVel.x
-      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80e6ef12ff04cd7409ee34dda96e90eb, type: 3}
