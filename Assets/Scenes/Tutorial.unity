@@ -166,9 +166,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_LightType: 3
   m_BlendStyleIndex: 0
-  m_FalloffIntensity: 0.8
+  m_FalloffIntensity: 0.6
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.42
+  m_Intensity: 0.13
   m_LightVolumeOpacity: 0
   m_ApplyToSortingLayers: bdb5b3a7
   m_LightCookieSprite: {fileID: 0}
@@ -179,8 +179,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensity: 0
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
-  m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 5.78
+  m_PointLightInnerRadius: 2.27
+  m_PointLightOuterRadius: 3.52
   m_PointLightDistance: 3
   m_PointLightQuality: 1
   m_ShapeLightParametricSides: 5
@@ -510,7 +510,7 @@ MonoBehaviour:
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 2.82
+  m_PointLightOuterRadius: 2.48
   m_PointLightDistance: 3
   m_PointLightQuality: 1
   m_ShapeLightParametricSides: 5
@@ -3937,44 +3937,38 @@ CompositeCollider2D:
   m_ColliderPaths:
   - m_Collider: {fileID: 3089796092349358567}
     m_ColliderPaths:
-    - - X: 125999251
-        Y: -84000041
-      - X: 125999917
-        Y: 52500100
+    - - X: 125999702
+        Y: -84000000
+      - X: 125999702
+        Y: 52500000
       - X: 52499900
-        Y: 52499751
-      - X: 52498218
-        Y: 21001078
-      - X: -83999900
-        Y: 21005304
-      - X: -84001235
-        Y: 73500092
-      - X: -147000025
-        Y: 73498816
-      - X: -146995907
-        Y: -83999694
-    - - X: 52499900
-        Y: 10500129
+        Y: 52499983
+      - X: 52499710
+        Y: 10500000
       - X: 21000100
-        Y: 10500187
-      - X: 21000128
+        Y: 10500300
+      - X: 20999838
         Y: 21000100
-      - X: 52499900
-        Y: 21000012
+      - X: -84000000
+        Y: 21000290
+      - X: -84000290
+        Y: 73499992
+      - X: -146999984
+        Y: 73499702
+      - X: -146999694
+        Y: -84000000
   m_CompositePaths:
     m_Paths:
-    - - {x: 12.599922, y: -8.400004}
-      - {x: 12.599989, y: 5.25001}
-      - {x: 5.24999, y: 5.249972}
-      - {x: 5.249819, y: 2.100108}
-      - {x: -8.39999, y: 2.1005332}
-      - {x: -8.400126, y: 7.35001}
-      - {x: -14.700004, y: 7.3498783}
-      - {x: -14.699588, y: -8.39997}
-    - - {x: 5.24999, y: 1.0500158}
-      - {x: 2.10001, y: 1.0500216}
-      - {x: 2.1000156, y: 2.10001}
-      - {x: 5.24999, y: 2.0999985}
+    - - {x: 12.599967, y: -8.400001}
+      - {x: 12.599967, y: 5.25}
+      - {x: 5.24999, y: 5.249995}
+      - {x: 5.249968, y: 1.0500001}
+      - {x: 2.10001, y: 1.0500329}
+      - {x: 2.0999808, y: 2.10001}
+      - {x: -8.400001, y: 2.100032}
+      - {x: -8.400032, y: 7.3499994}
+      - {x: -14.699999, y: 7.3499675}
+      - {x: -14.699966, y: -8.400001}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.000005
 --- !u!50 &5107009029723685000
