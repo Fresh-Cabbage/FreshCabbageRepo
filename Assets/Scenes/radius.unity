@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 59877785}
   - component: {fileID: 59877784}
   m_Layer: 0
-  m_Name: Tilemap
+  m_Name: Tilemap Vines
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
