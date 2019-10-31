@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public MovementProfile normalMovement;
     public MovementProfile totemMovement;
+    private MovementProfile CurrentMovement { get { return heldTotemContainer != null ? totemMovement : normalMovement; }}
 
     [Range(1, 2)]
     public int maxJumps;
@@ -116,7 +117,7 @@ public class PlayerController : MonoBehaviour
 
 
     void HandleMotion() {
-        MovementProfile mov = heldTotemContainer ? totemMovement : normalMovement;
+        MovementProfile mov = CurrentMovement;
 
         Vector2 vel = rb2d.velocity;
 
@@ -244,6 +245,11 @@ public class PlayerController : MonoBehaviour
         anim.SetTrigger(jumpNum == 1 ? "Jumped" : "DoubleJumped");
     }
 
+    public void BouncedOnTrampoline(float bounceVel) {
+        rb2d.velocity = new Vector2(rb2d.velocity.x, bounceVel * CurrentMovement.trampolineBounceMultiplier);
+        StartedJump(1);
+    }
+
     void StartedRoll() {
         moveState = MovementState.ROLL;
         rollTimer = rollTime;
@@ -339,4 +345,5 @@ public struct MovementProfile {
     public float jumpPower;
     public float verticalJerk;
     public float maxFallSpeed;
+    public float trampolineBounceMultiplier;
 }

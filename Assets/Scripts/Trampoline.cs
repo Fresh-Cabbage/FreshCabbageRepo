@@ -8,7 +8,10 @@ public class Trampoline : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") || collision.CompareTag("Totem"))
+        if (collision.CompareTag("Player")) {
+            collision.GetComponent<PlayerController>()?.BouncedOnTrampoline(bounceStrength);
+        }
+        else if (collision.CompareTag("Totem"))
         {
             GameObject other = collision.gameObject;
 
@@ -16,4 +19,6 @@ public class Trampoline : MonoBehaviour
             rb2d.velocity = new Vector2(rb2d.velocity.x, bounceStrength);
         }
     }
-} //Fun fact: Unity makes me angy.
+
+
+}
