@@ -11,9 +11,18 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TitleScene.unity
     guid: ebb9ccaf3944ed9449032293b6951e88
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/test.unity
     guid: 932bcd1e0ec3b2040af91ecf080d36af
+  - enabled: 1
+    path: Assets/Scenes/Tutorial.unity
+    guid: e60c91cde10e7284c881a213c3b2eafd
+  - enabled: 1
+    path: Assets/Scenes/VineBlockLevel.unity
+    guid: 979138b253d83b848ba4ab83fe331774
+  - enabled: 1
+    path: Assets/Scenes/TrampolineLevel.unity
+    guid: 9e263fc2d0ad6f94ea4c89cd423ec42c
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 53b96d9f78099e94c94719504b3a3190,
       type: 2}

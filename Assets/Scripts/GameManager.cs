@@ -35,13 +35,17 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(delay);
         SceneManager.LoadScene(name);
     }
+    IEnumerator LoadScene(int buildIndex, float delay) {
+        yield return new WaitForSeconds(delay);
+        SceneManager.LoadScene(buildIndex);
+    }
 
     public void PlayerDied() {
         StartCoroutine(LoadScene(SceneManager.GetActiveScene().name, 1.0f));
     }
 
     public void CompletedLevel() {
-        StartCoroutine(LoadScene(SceneManager.GetActiveScene().name, 2.0f));
+        StartCoroutine(LoadScene(SceneManager.GetActiveScene().buildIndex + 1, 2.0f));
     }
 
 
