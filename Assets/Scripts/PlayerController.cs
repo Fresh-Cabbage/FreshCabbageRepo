@@ -108,6 +108,14 @@ public class PlayerController : MonoBehaviour
     }
 
     private void FixedUpdate() {
+        // update the validity check of being grounded to account for new position
+        groundcheck.validCheck = c => {
+            if (c.CompareTag("Semisolid"))
+                return rb2d.velocity.y <= 0.2f && groundcheck.transform.position.y > c.bounds.max.y;
+            else
+                return rb2d.velocity.y <= 0.2f;
+        };
+
         if (physicsOn) {
             HandleMotion();
         }

@@ -10,6 +10,7 @@ TagManager:
   - Totem
   - FinishScreen
   - RollHitbox
+  - Semisolid
   layers:
   - Default
   - TransparentFX
@@ -22,8 +23,8 @@ TagManager:
   - Player
   - PlayerRoll
   - Breakable
-  - 
-  - 
+  - TotemHeld
+  - Semisolid
   - 
   - 
   - 
@@ -46,6 +47,9 @@ TagManager:
   m_SortingLayers:
   - name: Background
     uniqueID: 2813572541
+    locked: 0
+  - name: Semisolid
+    uniqueID: 630161459
     locked: 0
   - name: Default
     uniqueID: 0

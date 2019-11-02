@@ -15,8 +15,8 @@ public class EffectCheck : CollisionCheck
         targetTags = new List<string>() {"EffectRegion"};
     }
 
-    protected override bool IsValid(Collider2D other) {
-        return base.IsValid(other) && (other.GetComponent<EffectRegion>()?.regionType ?? null) == regionType;
+    protected override bool DefaultValidCheck(Collider2D other) {
+        return base.DefaultValidCheck(other) && (other.GetComponent<EffectRegion>()?.regionType ?? null) == regionType;
     }
     
     

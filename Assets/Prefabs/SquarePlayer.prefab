@@ -464,7 +464,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0024514198, y: -0.5003725}
+  m_Offset: {x: 0.0024514198, y: -0.03}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -492,6 +492,7 @@ MonoBehaviour:
   targetTags:
   - Ground
   - Totem
+  - Semisolid
 --- !u!1 &7081055991328886420
 GameObject:
   m_ObjectHideFlags: 0
@@ -541,7 +542,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 0.13
   m_LightVolumeOpacity: 0
-  m_ApplyToSortingLayers: bdb5b3a7
+  m_ApplyToSortingLayers: bdb5b3a733808f25
   m_LightCookieSprite: {fileID: 0}
   m_UseNormalMap: 0
   m_LightOrder: 0

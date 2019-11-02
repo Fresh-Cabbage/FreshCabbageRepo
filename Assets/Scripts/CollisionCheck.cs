@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -8,6 +9,9 @@ public class CollisionCheck : MonoBehaviour
     protected List<Collider2D> colliders;
 
     public List<string> targetTags;
+
+
+    public Func<Collider2D, bool> validCheck;
 
 
     protected virtual void Start() {
@@ -23,12 +27,12 @@ public class CollisionCheck : MonoBehaviour
     }
 
 
-    protected virtual bool IsValid(Collider2D other) {
+    protected virtual bool DefaultValidCheck(Collider2D other) {
         return other != null && other.enabled && targetTags.Any(tag => other.CompareTag(tag));
     }
     
     protected virtual void OnTriggerEnter2D(Collider2D other) {
-        if (IsValid(other)) {
+        if (DefaultValidCheck(other)) {
             // found a collider, add it to the list
             colliders.Add(other);
         }
@@ -39,10 +43,10 @@ public class CollisionCheck : MonoBehaviour
         colliders.Remove(other);
     }
 
-    protected void CheckColliders() {
+    public void CheckColliders() {
         for (int c = colliders.Count - 1; c >= 0; c--) {
             // remove any colliders that are no longer valid collisions
-            if (!IsValid(colliders[c])) {
+            if (!DefaultValidCheck(colliders[c]) || (validCheck != null && !validCheck(colliders[c]))) {
                 colliders.RemoveAt(c);
             }
         }
