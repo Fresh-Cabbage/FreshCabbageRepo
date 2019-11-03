@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class LevelFinisher : MonoBehaviour
 {
-    bool completed;
+    public GameObject finishExplosion;
+    public GameObject finishLight;
     
     public void FinishLevel() {
-        // right now this method is very minimal
-        // but we expect a lot more work to be done when the level is finished in the future
-        completed = true;
-        
+        GameObject.Instantiate(finishExplosion, transform.position, Quaternion.identity);
+        // GameObject.Instantiate(finishLight, transform.position, Quaternion.identity);
+
         GameManager.Instance?.CompletedLevel();
     }
 }

@@ -45,8 +45,8 @@ public class PlayerController : MonoBehaviour
     public GameObject totemHoldObject;
     public Vector2 totemThrowVel;
 
-    public bool physicsOn;
-    public bool canInput;
+    public bool physicsFrozen;
+    public bool inCutscene;
     Vector2 previousVelocity;
 
     float xInput;
@@ -68,9 +68,6 @@ public class PlayerController : MonoBehaviour
     public static PlayerAction OnDeath;
 
     private void Start() {
-        physicsOn = true;
-        canInput = true;
-
         rb2d = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
 
@@ -82,13 +79,7 @@ public class PlayerController : MonoBehaviour
             Die();
 
         // get inputs
-        xInput = Input.GetAxisRaw("Horizontal");
-        jInput = Input.GetAxisRaw("Jump") > 0;
-        dInput = Input.GetAxisRaw("Vertical") < 0;
-        rInput = Input.GetAxisRaw("Roll") > 0;
-
-        oldTInput = tInput;
-        tInput = Input.GetAxisRaw("Interact") > 0;
+        UpdateInput(!inCutscene);
 
         // check for flip when player is moving in direction of input
         if (xInput * rb2d.velocity.x > 0) {
@@ -98,7 +89,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (canInput) {
+        if (!inCutscene && !physicsFrozen) {
             HandleInteractions();
         }
 
@@ -116,7 +107,7 @@ public class PlayerController : MonoBehaviour
                 return rb2d.velocity.y <= 0.2f;
         };
 
-        if (physicsOn) {
+        if (!physicsFrozen) {
             HandleMotion();
         }
 
@@ -127,6 +118,21 @@ public class PlayerController : MonoBehaviour
         oldRInput = rInput;
     }
 
+
+    void UpdateInput(bool inputEnabled) {
+        if (inputEnabled) {
+            xInput = Input.GetAxisRaw("Horizontal");
+            jInput = Input.GetAxisRaw("Jump") > 0;
+            dInput = Input.GetAxisRaw("Vertical") < 0;
+            rInput = Input.GetAxisRaw("Roll") > 0;
+
+            oldTInput = tInput;
+            tInput = Input.GetAxisRaw("Interact") > 0;
+        } else {
+            xInput = 0;
+            jInput = dInput = rInput = oldTInput = tInput = false;
+        }
+    }
 
     void HandleInteractions() {
         interactBufferTimer = tPressed ? interactBufferTime : Helpers.Timer(interactBufferTimer);
@@ -287,22 +293,14 @@ public class PlayerController : MonoBehaviour
 
     void StartedGrab() {
         // physics + input disabled
-        physicsOn = false;
-        previousVelocity = rb2d.velocity;
-        rb2d.velocity = Vector2.zero;
-        rb2d.isKinematic = true;
-        canInput = false;
+        SetAnimationFreeze(true);
 
         anim.SetTrigger("Grabbed");
     }
 
     void StoppedGrab() {
         // physics + input enabled
-        physicsOn = true;
-        rb2d.isKinematic = false;
-        rb2d.velocity = previousVelocity;
-        rb2d.gravityScale /= 2;
-        canInput = true;
+        SetAnimationFreeze(false);
 
         Debug.Log("PLAYER: termination of grab animation");
     }
@@ -326,6 +324,21 @@ public class PlayerController : MonoBehaviour
         // tell the TotemContainer to switch active totems at this time
 
         Debug.Log("PLAYER: termination of drop animation");
+    }
+
+
+    void SetAnimationFreeze(bool isFrozen) {
+        physicsFrozen = isFrozen;
+
+        if (isFrozen) {
+            previousVelocity = rb2d.velocity;
+            rb2d.velocity = Vector2.zero;
+            rb2d.isKinematic = true;
+        } else {
+            rb2d.isKinematic = false;
+            rb2d.velocity = previousVelocity;
+            rb2d.gravityScale /= 2;
+        }
     }
 
 

@@ -46,18 +46,18 @@ public class CollisionCheck : MonoBehaviour
     public void CheckColliders() {
         for (int c = colliders.Count - 1; c >= 0; c--) {
             // remove any colliders that are no longer valid collisions
-            if (!DefaultValidCheck(colliders[c]) || (validCheck != null && !validCheck(colliders[c]))) {
+            if (!DefaultValidCheck(colliders[c])) {
                 colliders.RemoveAt(c);
             }
         }
     }
 
     public bool IsColliding() {
-        CheckColliders();
-        return colliders.Count > 0;
+        return GetCollider() != null;
     }
 
     public Collider2D GetCollider() {
-        return IsColliding() ? colliders[colliders.Count - 1] : null;
+        CheckColliders();
+        return colliders.FirstOrDefault(validCheck ?? (c => true));
     }
 }

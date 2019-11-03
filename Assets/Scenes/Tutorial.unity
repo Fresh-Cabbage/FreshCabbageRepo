@@ -366,11 +366,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SquarePlayer
       objectReference: {fileID: 0}
-    - target: {fileID: 1668558032738856221, guid: 80e6ef12ff04cd7409ee34dda96e90eb,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.471
-      objectReference: {fileID: 0}
     - target: {fileID: 8836013932829332550, guid: 80e6ef12ff04cd7409ee34dda96e90eb,
         type: 3}
       propertyPath: m_CompositePaths.m_Paths.Array.size
