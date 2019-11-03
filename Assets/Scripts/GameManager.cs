@@ -38,6 +38,8 @@ public class GameManager : MonoBehaviour
         worldLight = GameObject.FindGameObjectWithTag("WorldLight")?.GetComponent<WorldLight>();
         if (worldLight == null) 
             Debug.LogWarning("No world light in this scene!");
+        
+        worldLight?.FadeIn(0.5f);
     }
 
     IEnumerator LoadScene(string name, float delay) {
@@ -49,8 +51,14 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(buildIndex);
     }
 
+    IEnumerator FadeOut(float delay, float time) {
+        yield return new WaitForSeconds(delay);
+        worldLight?.FadeOut(time);
+    }
+
     public void PlayerDied() {
         StartCoroutine(LoadScene(SceneManager.GetActiveScene().name, 1.0f));
+        StartCoroutine(FadeOut(0.5f, 0.5f));
     }
 
     public void CompletedLevel() {
@@ -60,6 +68,7 @@ public class GameManager : MonoBehaviour
             worldLight.Flash(2, 1);
         
         StartCoroutine(LoadScene(SceneManager.GetActiveScene().buildIndex + 1, 2.0f));
+        StartCoroutine(FadeOut(1.5f, 0.5f));
     }
 
 
