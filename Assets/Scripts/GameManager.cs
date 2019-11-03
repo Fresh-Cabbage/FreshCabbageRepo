@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public static GameManager Instance;
 
     PlayerController player;
+    WorldLight worldLight;
 
     private void Awake() {
         // enforce singleton
@@ -31,9 +32,12 @@ public class GameManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode loadMode) {
         player = GameObject.FindGameObjectWithTag("Player")?.GetComponent<PlayerController>();
-
         if (player == null)
             Debug.LogWarning("No player in this scene!");
+
+        worldLight = GameObject.FindGameObjectWithTag("WorldLight")?.GetComponent<WorldLight>();
+        if (worldLight == null) 
+            Debug.LogWarning("No world light in this scene!");
     }
 
     IEnumerator LoadScene(string name, float delay) {
@@ -52,6 +56,8 @@ public class GameManager : MonoBehaviour
     public void CompletedLevel() {
         if (player != null)
             player.inCutscene = true;
+        if (worldLight != null)
+            worldLight.Flash(2, 1);
         
         StartCoroutine(LoadScene(SceneManager.GetActiveScene().buildIndex + 1, 2.0f));
     }

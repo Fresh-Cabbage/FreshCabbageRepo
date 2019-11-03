@@ -11,6 +11,7 @@ TagManager:
   - FinishScreen
   - RollHitbox
   - Semisolid
+  - WorldLight
   layers:
   - Default
   - TransparentFX
