@@ -12,6 +12,8 @@ public class BreakableBlock : MonoBehaviour
 
     bool destroyed;
 
+    public GameObject breakParticles;
+
     public Material white;
 
     private void Start() {
@@ -39,6 +41,9 @@ public class BreakableBlock : MonoBehaviour
         Time.timeScale = 0;
         yield return new WaitForSecondsRealtime(freezeTime);
         Time.timeScale = 1;
+
+        // spawn particles
+        GameObject.Instantiate(breakParticles, transform.position, Quaternion.identity);
 
         // finally, destroy this
         Destroy(gameObject);

@@ -197,4 +197,6 @@ MonoBehaviour:
   playerCheck: {fileID: 3316842789752824255}
   freezeTime: 0.04
   breakDelay: 0.02
+  breakParticles: {fileID: 7305642620113764548, guid: 894abb2c5dde9ea42be655da90199133,
+    type: 3}
   white: {fileID: 2100000, guid: d52ee20e44cd99a45946eed7854d3ad4, type: 2}
