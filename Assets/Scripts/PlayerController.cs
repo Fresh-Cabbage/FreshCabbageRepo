@@ -266,6 +266,9 @@ public class PlayerController : MonoBehaviour
 
         // set anim trigger
         anim.SetTrigger(jumpNum == 1 ? "Jumped" : "DoubleJumped");
+
+        // account for roll cancel in animation
+        anim.SetBool("Rolling", false);
     }
 
     public void BouncedOnTrampoline(float bounceVel) {
@@ -276,13 +279,14 @@ public class PlayerController : MonoBehaviour
     void StartedRoll() {
         moveState = MovementState.ROLL;
         rollTimer = rollTime;
-        anim.SetTrigger("Rolled");
+        anim.SetBool("Rolling", true);
 
         OnStartRoll?.Invoke();
     }
 
     void StoppedRoll() {
         moveState = MovementState.WALK;
+        anim.SetBool("Rolling", false);
 
         OnStopRoll?.Invoke();
     }
