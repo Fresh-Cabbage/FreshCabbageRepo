@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3184361965191383886}
   - component: {fileID: 1943697705134628316}
-  - component: {fileID: 5763161288945982403}
+  - component: {fileID: 7796823556346923701}
   m_Layer: 0
   m_Name: WorldLight
   m_TagString: WorldLight
@@ -73,7 +73,7 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
---- !u!114 &5763161288945982403
+--- !u!114 &7796823556346923701
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -82,7 +82,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3894186200934518992}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fbeef6216a9499439959b068924a33c, type: 3}
+  m_Script: {fileID: 11500000, guid: 9c3071ec08fa2d44bb75f9e42b447380, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   defaultIntensity: 1
