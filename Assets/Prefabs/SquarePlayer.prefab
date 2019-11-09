@@ -102,19 +102,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   normalMovement:
     maxXSpeed: 7
-    xAccel: 5
-    jumpPower: 12
-    verticalJerk: 0.3
-    maxFallSpeed: 39
-    trampolineBounceMultiplier: 2
+    xAccel: 3
+    jumpPower: 10
+    shortJumpMultiplier: 0.7
+    maxJumps: 2
+    verticalJerk: 0.15
+    maxFallSpeed: 20
+    trampolineBounceMultiplier: 1.5
   totemMovement:
     maxXSpeed: 7
-    xAccel: 1.5
-    jumpPower: 10
-    verticalJerk: 0.3
-    maxFallSpeed: 39
-    trampolineBounceMultiplier: 1.3
-  maxJumps: 2
+    xAccel: 3
+    jumpPower: 9
+    shortJumpMultiplier: 0.7
+    maxJumps: 2
+    verticalJerk: 0.2
+    maxFallSpeed: 20
+    trampolineBounceMultiplier: 1.1
   rollSpeed: 20
   rollTime: 0.3
   jumpBufferTime: 0.15

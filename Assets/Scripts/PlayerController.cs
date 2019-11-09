@@ -8,8 +8,6 @@ public class PlayerController : MonoBehaviour
     public MovementProfile totemMovement;
     private MovementProfile CurrentMovement { get { return heldTotemContainer != null ? totemMovement : normalMovement; }}
 
-    [Range(1, 2)]
-    public int maxJumps;
     int numJumpsUsed;
 
     public float rollSpeed;
@@ -207,7 +205,7 @@ public class PlayerController : MonoBehaviour
             vel.y = mov.jumpPower;
             StartedJump(1);
         }
-        else if (maxJumps == 2 && numJumpsUsed != 2 && coyoteTimer == 0 && jumpBufferTimer > 0 && moveState.CanGoToJump()) {
+        else if (mov.maxJumps == 2 && numJumpsUsed != 2 && coyoteTimer == 0 && jumpBufferTimer > 0 && moveState.CanGoToJump()) {
             vel.y = mov.jumpPower;
             StartedJump(2);
         }
@@ -215,7 +213,7 @@ public class PlayerController : MonoBehaviour
         if (minimumJumpTimer == 0 && moveState == MovementState.JUMP && (!jInput || rb2d.velocity.y < 0.2f)) {
             // player's jump has terminated (either by releasing the jump button or by starting to move down)
             moveState = MovementState.FALL;
-            vel.y /= 2;
+            vel.y *= mov.shortJumpMultiplier;
         }
 
         if (isGrounded) {
@@ -383,6 +381,8 @@ public struct MovementProfile {
     public float maxXSpeed;
     public float xAccel;
     public float jumpPower;
+    [Range(0, 1)] public float shortJumpMultiplier;
+    [Range(1, 2)] public int maxJumps;
     public float verticalJerk;
     public float maxFallSpeed;
     public float trampolineBounceMultiplier;
