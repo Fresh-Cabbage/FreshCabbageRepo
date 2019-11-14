@@ -134,6 +134,8 @@ MonoBehaviour:
   totemThrowVel: {x: 5, y: 5}
   physicsFrozen: 0
   inCutscene: 0
+  deathParticles: {fileID: 2778316006363971454, guid: 6d2292c6e0221b64c88f2be085212098,
+    type: 3}
 --- !u!95 &2068722304
 Animator:
   serializedVersion: 3

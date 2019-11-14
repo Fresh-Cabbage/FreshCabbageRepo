@@ -61,6 +61,9 @@ public class PlayerController : MonoBehaviour
 
     bool tPressed { get { return tInput && !oldTInput; }}
 
+
+    public GameObject deathParticles;
+
     
     // events!
     public delegate void PlayerAction();
@@ -408,6 +411,8 @@ public class PlayerController : MonoBehaviour
     private void Die() {
         OnDeath?.Invoke();
         GameManager.Instance?.PlayerDied();
+
+        GameObject.Instantiate(deathParticles, transform.position, Quaternion.identity);
 
         Destroy(gameObject);
     }
