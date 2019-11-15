@@ -108,7 +108,8 @@ MonoBehaviour:
     maxJumps: 2
     verticalJerk: 0.15
     maxFallSpeed: 20
-    trampolineBounceMultiplier: 1.5
+    trampolineBounceMultiplier: 1.3
+    trampolineBounceMultiplierWithJump: 1.6
   totemMovement:
     maxXSpeed: 7
     xAccel: 3
@@ -118,6 +119,7 @@ MonoBehaviour:
     verticalJerk: 0.2
     maxFallSpeed: 20
     trampolineBounceMultiplier: 1.1
+    trampolineBounceMultiplierWithJump: 1.4
   rollSpeed: 20
   rollTime: 0.3
   jumpBufferTime: 0.15
@@ -132,6 +134,8 @@ MonoBehaviour:
   totemThrowVel: {x: 5, y: 5}
   physicsFrozen: 0
   inCutscene: 0
+  deathParticles: {fileID: 2778316006363971454, guid: 6d2292c6e0221b64c88f2be085212098,
+    type: 3}
 --- !u!95 &2068722304
 Animator:
   serializedVersion: 3

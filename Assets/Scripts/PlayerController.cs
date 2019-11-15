@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -48,6 +49,8 @@ public class PlayerController : MonoBehaviour
     public bool inCutscene;
     Vector2 previousVelocity;
 
+    List<Vector2> boosts;
+
     float xInput;
     bool jInput;
     bool rInput;
@@ -58,6 +61,9 @@ public class PlayerController : MonoBehaviour
     bool dInput;
 
     bool tPressed { get { return tInput && !oldTInput; }}
+
+
+    public GameObject deathParticles;
 
     
     // events!
@@ -71,6 +77,8 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
 
         baseGravity = rb2d.gravityScale;
+
+        boosts = new List<Vector2>();
     }
 
     private void Update() {
@@ -101,6 +109,8 @@ public class PlayerController : MonoBehaviour
     }
 
     private void FixedUpdate() {
+        Debug.DrawRay(transform.position, rb2d.velocity, Color.green, Time.deltaTime);
+
         // update the validity check of being grounded to account for new position
         groundcheck.validCheck = c => {
             return rb2d.velocity.y <= 0.2f;
@@ -147,6 +157,17 @@ public class PlayerController : MonoBehaviour
         MovementProfile mov = CurrentMovement;
 
         Vector2 vel = rb2d.velocity;
+
+        // unapply boosts
+        for (int b = boosts.Count - 1; b >= 0; b--) {
+            Vector2 boost = boosts[b];
+            vel -= boost;
+            
+            // reduce the intensity of the boost over time
+            boosts[b] = DeBoost(boost);
+            if (boosts[b] == Vector2.zero)
+                boosts.RemoveAt(b);
+        }
 
         // first, handle general movement state stuff
         if (moveState == MovementState.IDLE) {
@@ -246,7 +267,22 @@ public class PlayerController : MonoBehaviour
             StartedRoll();
         }
 
+        // re-apply boosts before assigning new velocity
+        foreach (Vector2 boost in boosts) 
+            vel += boost;
+
         rb2d.velocity = vel;
+    }
+
+    // reduces the intensity of this boost
+    Vector2 DeBoost(Vector2 boost) {
+        float reducedXMagnitude = Mathf.Abs(boost.x) - CurrentMovement.xAccel;
+        boost.x = Mathf.Sign(boost.x) * Mathf.Max(0, reducedXMagnitude);
+
+        float reducedYMagnitude = Mathf.Abs(boost.y) - baseGravity / 2;
+        boost.y = Mathf.Sign(boost.y) * Mathf.Max(0, reducedYMagnitude);
+
+        return boost;
     }
 
 
@@ -271,11 +307,20 @@ public class PlayerController : MonoBehaviour
 
         // account for roll cancel in animation
         anim.SetBool("Rolling", false);
+
+        // cut all current vertical boosts in half
+        boosts = boosts.Select(boost => boost.WithY(boost.y / 2)).ToList();
     }
 
     public void BouncedOnTrampoline(float bounceVel) {
-        rb2d.velocity = new Vector2(rb2d.velocity.x, bounceVel * CurrentMovement.trampolineBounceMultiplier);
+        // adjust jump height
+        bounceVel *= jInput ? CurrentMovement.trampolineBounceMultiplierWithJump : CurrentMovement.trampolineBounceMultiplier;
+
+        rb2d.velocity = new Vector2(rb2d.velocity.x, bounceVel);
         StartedJump(1);
+
+        // turn this trampoline bounce thing into a boost
+        boosts.Add(new Vector2(0, bounceVel));
     }
 
     void StartedRoll() {
@@ -304,8 +349,6 @@ public class PlayerController : MonoBehaviour
     void StoppedGrab() {
         // physics + input enabled
         SetAnimationFreeze(false);
-
-        Debug.Log("PLAYER: termination of grab animation");
     }
 
     void StartedThrow() {
@@ -313,7 +356,7 @@ public class PlayerController : MonoBehaviour
     }
 
     void StoppedThrow() {
-        Debug.Log("PLAYER: termination of throw animation");
+        
     }
 
     void StartedDrop() {
@@ -376,7 +419,9 @@ public class PlayerController : MonoBehaviour
         if (!CheckpointManager.checkpointsActive) { 
             Destroy(gameObject);
         }
+        GameObject.Instantiate(deathParticles, transform.position, Quaternion.identity);
 
+        Destroy(gameObject);
     }
 
 
@@ -393,4 +438,5 @@ public struct MovementProfile {
     public float verticalJerk;
     public float maxFallSpeed;
     public float trampolineBounceMultiplier;
+    public float trampolineBounceMultiplierWithJump;
 }
