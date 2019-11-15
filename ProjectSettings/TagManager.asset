@@ -12,6 +12,7 @@ TagManager:
   - RollHitbox
   - Semisolid
   - WorldLight
+  - Checkpoint
   layers:
   - Default
   - TransparentFX

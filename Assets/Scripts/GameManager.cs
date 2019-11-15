@@ -57,8 +57,15 @@ public class GameManager : MonoBehaviour
     }
 
     public void PlayerDied() {
-        StartCoroutine(LoadScene(SceneManager.GetActiveScene().name, 1.0f));
-        StartCoroutine(FadeOut(0.5f, 0.5f));
+        if (!CheckpointManager.checkpointsActive)
+        {
+            StartCoroutine(LoadScene(SceneManager.GetActiveScene().name, 1.0f));
+            StartCoroutine(FadeOut(0.5f, 0.5f));
+        }
+        else
+        {
+            CheckpointManager.ResetFromCheckpoint();
+        }
     }
 
     public void CompletedLevel() {

@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
     public CollisionCheck groundcheck;
     public CollisionCheck hazardcheck;
     public CollisionCheck totemcheck;
+    public CollisionCheck checkpointcheck;
     bool isGrounded { get { return groundcheck.IsColliding(); }}
 
     public GameObject rollHitbox;
@@ -75,6 +76,9 @@ public class PlayerController : MonoBehaviour
     private void Update() {
         if (hazardcheck.IsColliding())
             Die();
+
+        
+        
 
         // get inputs
         UpdateInput(!inCutscene);
@@ -369,7 +373,10 @@ public class PlayerController : MonoBehaviour
         OnDeath?.Invoke();
         GameManager.Instance?.PlayerDied();
 
-        Destroy(gameObject);
+        if (!CheckpointManager.checkpointsActive) { 
+            Destroy(gameObject);
+        }
+
     }
 
 
