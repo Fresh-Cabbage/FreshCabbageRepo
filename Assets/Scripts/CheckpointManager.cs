@@ -4,57 +4,43 @@ using UnityEngine;
 
 public class CheckpointManager : MonoBehaviour
 {
-    public static GameObject player;
-    public GameObject[] totems;
-    private static GameObject[] totemList;
-    private static SortedDictionary<GameObject, Vector3> totemPos;
-    private static Vector3 playerPos;
-    public static bool checkpointsActive;
-    private Collider2D thisCollider;
-    private bool isActive = false;
+    public static Checkpoint currentCheckpoint;
+    
+    
+    private void Start() {
+        int checkpointCounter = 0;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        checkpointsActive = false;
-        player = GameObject.FindGameObjectWithTag("Player");
-        if (player==null)
-        {
-            Debug.LogWarning("oh no");
-        }
-        totemList = totems;
-        for (int i = 0; i < totemList.Length; i++)
-        {
-            totemPos.Add(totemList[i], totemList[i].transform.position);
-        }
-    }
+        foreach (Transform t in transform) {
+            Checkpoint c = t.GetComponent<Checkpoint>();
+            if (c != null) {
+                c.checkpointManager = this;
+                c.checkpointNumber = checkpointCounter;
 
-    public static void ResetFromCheckpoint()
-    {
-        player.transform.position = playerPos;
-        for (int i = 0; i < totemList.Length; i++)
-        {
-            totemList[i].transform.position = totemPos[totemList[i]];
-        }
-    }
+                if (c.checkpointNumber == GameManager.Instance?.previousCheckpoint) {
+                    GameManager.Instance.SpawnPlayerAtPosition(c.respawnPosition);
+                    currentCheckpoint = c;
+                    c.SetActivated(true);
+                } else {
+                    c.SetActivated(false);
+                }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        ActivateTotem();
-    }
-
-    public void ActivateTotem()
-    {
-        checkpointsActive = true;
-        if (!isActive)
-        {
-            Debug.Log("activated");
-            isActive = true;
-            playerPos = player.transform.position;
-            for (int i = 0; i < totemList.Length; i++)
-            {
-                totemPos[totemList[i]] = totemList[i].transform.position;
+                checkpointCounter++;
             }
         }
+    }
+
+
+    public void TryActivateCheckpoint(Checkpoint checkpoint) {
+        if (currentCheckpoint == checkpoint) return;
+
+        // de-activate current checkpoint
+        currentCheckpoint?.SetActivated(false);
+
+        // activate new checkpoint
+        currentCheckpoint = checkpoint;
+        currentCheckpoint.SetActivated(true);
+
+        if (GameManager.Instance != null)
+            GameManager.Instance.previousCheckpoint = currentCheckpoint.checkpointNumber;
     }
 }

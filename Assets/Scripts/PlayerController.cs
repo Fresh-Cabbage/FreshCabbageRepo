@@ -416,9 +416,6 @@ public class PlayerController : MonoBehaviour
         OnDeath?.Invoke();
         GameManager.Instance?.PlayerDied();
 
-        if (!CheckpointManager.checkpointsActive) { 
-            Destroy(gameObject);
-        }
         GameObject.Instantiate(deathParticles, transform.position, Quaternion.identity);
 
         Destroy(gameObject);

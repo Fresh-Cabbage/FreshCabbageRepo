@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     PlayerController player;
     WorldLight worldLight;
 
+    public int previousCheckpoint;
+
     private void Awake() {
         // enforce singleton
         if (Instance == null)
@@ -30,7 +32,12 @@ public class GameManager : MonoBehaviour
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
+    private void Start() {
+        previousCheckpoint = -1;
+    }
+
     private void OnSceneLoaded(Scene scene, LoadSceneMode loadMode) {
+        Debug.Log("GAMEMANAGER: onsceneloaded happens");
         player = GameObject.FindGameObjectWithTag("Player")?.GetComponent<PlayerController>();
         if (player == null)
             Debug.LogWarning("No player in this scene!");
@@ -40,6 +47,11 @@ public class GameManager : MonoBehaviour
             Debug.LogWarning("No world light in this scene!");
         
         worldLight?.FadeIn(0.5f);
+    }
+
+    public void SpawnPlayerAtPosition(Vector2 position) {
+        Debug.Log("GAMEMANAGER: spawnplayer happens " + player);
+        player.transform.position = position;
     }
 
     IEnumerator LoadScene(string name, float delay) {
@@ -57,15 +69,8 @@ public class GameManager : MonoBehaviour
     }
 
     public void PlayerDied() {
-        if (!CheckpointManager.checkpointsActive)
-        {
-            StartCoroutine(LoadScene(SceneManager.GetActiveScene().name, 1.0f));
-            StartCoroutine(FadeOut(0.5f, 0.5f));
-        }
-        else
-        {
-            CheckpointManager.ResetFromCheckpoint();
-        }
+        StartCoroutine(LoadScene(SceneManager.GetActiveScene().name, 1.0f));
+        StartCoroutine(FadeOut(0.5f, 0.5f));
     }
 
     public void CompletedLevel() {
@@ -73,6 +78,8 @@ public class GameManager : MonoBehaviour
             player.inCutscene = true;
         if (worldLight != null)
             worldLight.Flash(2, 1);
+
+        previousCheckpoint = -1;
         
         StartCoroutine(LoadScene(SceneManager.GetActiveScene().buildIndex + 1, 2.0f));
         StartCoroutine(FadeOut(1.5f, 0.5f));
