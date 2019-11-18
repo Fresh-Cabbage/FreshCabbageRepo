@@ -18,6 +18,9 @@ public class Trampoline : MonoBehaviour
             Rigidbody2D rb2d = other.GetComponent<Rigidbody2D>();
             rb2d.velocity = new Vector2(rb2d.velocity.x, bounceStrength);
         }
+        else if (collision.CompareTag("Hazard") && collision.GetComponent<Bullet>() != null) {
+            collision.GetComponent<Bullet>().BouncedOnTrampoline(bounceStrength);
+        }
     }
 
 

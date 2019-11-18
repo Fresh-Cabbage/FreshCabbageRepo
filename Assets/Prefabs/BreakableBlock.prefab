@@ -84,6 +84,7 @@ GameObject:
   - component: {fileID: 3316842790301982185}
   - component: {fileID: 3316842790301982186}
   - component: {fileID: 3316842790301982187}
+  - component: {fileID: 4875700525059005523}
   m_Layer: 0
   m_Name: BreakableBlock
   m_TagString: Untagged
@@ -200,3 +201,29 @@ MonoBehaviour:
   breakParticles: {fileID: 7305642620113764548, guid: 894abb2c5dde9ea42be655da90199133,
     type: 3}
   white: {fileID: 2100000, guid: d52ee20e44cd99a45946eed7854d3ad4, type: 2}
+--- !u!61 &4875700525059005523
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3316842790301982196}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0

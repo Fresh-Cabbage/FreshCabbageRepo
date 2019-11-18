@@ -3,7 +3,7 @@ using UnityEngine;
 public enum EffectRegionType {
     ELECTRIC,
     GROWTH,
-    TIME,
+    ICE,
     WIN,
     UNKNOWN
 }
