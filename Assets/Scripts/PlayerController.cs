@@ -82,11 +82,8 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Update() {
-        if (hazardcheck.IsColliding())
+        if (!inCutscene && hazardcheck.IsColliding())
             Die();
-
-        
-        
 
         // get inputs
         UpdateInput(!inCutscene);
@@ -158,8 +155,9 @@ public class PlayerController : MonoBehaviour
 
         Vector2 vel = rb2d.velocity;
 
-        // unapply boosts
+        // BOOST HANDLING
         for (int b = boosts.Count - 1; b >= 0; b--) {
+            // unapply this boost to get a base velocity
             Vector2 boost = boosts[b];
             vel -= boost;
             
@@ -169,7 +167,7 @@ public class PlayerController : MonoBehaviour
                 boosts.RemoveAt(b);
         }
 
-        // first, handle general movement state stuff
+        // GROUNDED MOVEMENT STATE HANDLING
         if (moveState == MovementState.IDLE) {
             // player ducked: transition to DUCK state
             if (dInput && Mathf.Abs(vel.x) < 0.05f) {
@@ -191,30 +189,41 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        // ROLL STATE AND MOVEMENT HANDLING
         if (rollTimer > 0) {
-            // player should have roll velocity
-            vel.x = transform.localScale.x * rollSpeed;
-            
+            // max out the player's base x movement speed during a roll
+            vel.x = CurrentMovement.maxXSpeed * transform.localScale.x;
+
             rollTimer = Helpers.Timer(rollTimer);
             if (rollTimer == 0) {
                 StoppedRoll();
             }
         }
-        else if (moveState != MovementState.DUCK && xInput != 0) {
-            // accelerate player in the direction of motion
-            vel.x += xInput * mov.xAccel;
-            vel.x = Mathf.Clamp(vel.x, -mov.maxXSpeed, mov.maxXSpeed);
+        if (rInput && !oldRInput && moveState.CanGoToRoll() && heldTotemContainer == null) {
+            StartedRoll();
         }
-        else {
-            if (Mathf.Abs(vel.x) < mov.xAccel) {
-                // player should stop
-                vel.x = 0;
+
+        if (rollTimer == 0) {
+            // HORIZONTAL MOVEMENT HANDLING
+            if (moveState != MovementState.DUCK && xInput != 0) {
+                // accelerate player in the direction of motion
+                vel.x += xInput * mov.xAccel;
+                vel.x = Mathf.Clamp(vel.x, -mov.maxXSpeed, mov.maxXSpeed);
             }
             else {
-                // player's speed should decrease
-                vel.x -= Mathf.Sign(vel.x) * mov.xAccel;
+                if (Mathf.Abs(vel.x) < mov.xAccel) {
+                    // player should stop
+                    vel.x = 0;
+                }
+                else {
+                    // player's speed should decrease
+                    vel.x -= Mathf.Sign(vel.x) * mov.xAccel;
+                }
             }
         }
+
+        
+        // JUMP CHECKING
 
         // jump buffer timer should decrease when jump button has not been pushed down
         jumpBufferTimer = jInput && !oldJInput ? jumpBufferTime : Helpers.FixedTimer(jumpBufferTimer);
@@ -235,12 +244,14 @@ public class PlayerController : MonoBehaviour
             StartedJump(2);
         }
 
+        // FALL CHECKING
         if (minimumJumpTimer == 0 && moveState == MovementState.JUMP && (!jInput || rb2d.velocity.y < 0.2f)) {
             // player's jump has terminated (either by releasing the jump button or by starting to move down)
             moveState = MovementState.FALL;
             vel.y *= mov.shortJumpMultiplier;
         }
 
+        // FALL MOTION HANDLING
         if (isGrounded) {
             // player is not falling, so set gravity scale to base level
             rb2d.gravityScale = baseGravity;
@@ -262,10 +273,6 @@ public class PlayerController : MonoBehaviour
 
         vel.y = Mathf.Max(vel.y, -mov.maxFallSpeed);
 
-        // roll check
-        if (rInput && !oldRInput && moveState.CanGoToRoll() && heldTotemContainer == null) {
-            StartedRoll();
-        }
 
         // re-apply boosts before assigning new velocity
         foreach (Vector2 boost in boosts) 
@@ -276,7 +283,7 @@ public class PlayerController : MonoBehaviour
 
     // reduces the intensity of this boost
     Vector2 DeBoost(Vector2 boost) {
-        float reducedXMagnitude = Mathf.Abs(boost.x) - CurrentMovement.xAccel;
+        float reducedXMagnitude = Mathf.Abs(boost.x) - CurrentMovement.xAccel / 4;
         boost.x = Mathf.Sign(boost.x) * Mathf.Max(0, reducedXMagnitude);
 
         float reducedYMagnitude = Mathf.Abs(boost.y) - baseGravity / 2;
@@ -327,6 +334,9 @@ public class PlayerController : MonoBehaviour
         moveState = MovementState.ROLL;
         rollTimer = rollTime;
         anim.SetBool("Rolling", true);
+
+        boosts.Add(new Vector2(rollSpeed * transform.localScale.x, 0));
+        rb2d.velocity = new Vector2(0, rb2d.velocity.y);
 
         OnStartRoll?.Invoke();
     }
