@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
 
     PlayerController player;
     WorldLight worldLight;
+    Camera mainCamera;
+    public Camera MainCamera { get { return mainCamera; }}
 
     public int previousCheckpoint;
 
@@ -45,6 +47,10 @@ public class GameManager : MonoBehaviour
         worldLight = GameObject.FindGameObjectWithTag("WorldLight")?.GetComponent<WorldLight>();
         if (worldLight == null) 
             Debug.LogWarning("No world light in this scene!");
+
+        mainCamera = GameObject.FindGameObjectWithTag("MainCamera")?.GetComponent<Camera>();
+        if (mainCamera == null)
+            Debug.LogWarning("No camera in this scene!");
         
         worldLight?.FadeIn(0.5f);
     }
