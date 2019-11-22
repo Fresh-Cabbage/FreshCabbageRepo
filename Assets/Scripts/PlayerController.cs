@@ -422,7 +422,7 @@ public class PlayerController : MonoBehaviour
         return true;
     }
 
-    private void Die() {
+    public void Die() {
         OnDeath?.Invoke();
         GameManager.Instance?.PlayerDied();
 

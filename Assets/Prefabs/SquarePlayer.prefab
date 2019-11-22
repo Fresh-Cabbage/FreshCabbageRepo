@@ -406,6 +406,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 172272162652772652}
+  - component: {fileID: 7614893746384708354}
   m_Layer: 0
   m_Name: SpriteContainer
   m_TagString: Untagged
@@ -428,6 +429,21 @@ Transform:
   m_Father: {fileID: 3932474212417406063}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7614893746384708354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6187027951512748247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2696a4417fca43e4f9d649d478e5768e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resetHoldTime: 0.5
+  resetShakeIntensity: 0.4
+  player: {fileID: 6259706872622238908}
 --- !u!1 &6232246917518937096
 GameObject:
   m_ObjectHideFlags: 0

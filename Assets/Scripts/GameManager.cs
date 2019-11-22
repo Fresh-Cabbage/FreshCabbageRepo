@@ -93,8 +93,6 @@ public class GameManager : MonoBehaviour
 
 
     private void Update() {
-        if (Input.GetKeyDown(KeyCode.R)) {
-            StartCoroutine(LoadScene(SceneManager.GetActiveScene().name, 0.0f));
-        }
+        
     }
 }
