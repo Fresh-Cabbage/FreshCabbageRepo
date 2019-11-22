@@ -30,6 +30,9 @@ public class Trampoline : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (!active)
+            return;
+        
         if (collision.CompareTag("Player")) {
             Bounced();
             collision.GetComponent<PlayerController>()?.BouncedOnTrampoline(bounceStrength);

@@ -30,7 +30,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3383425701766995554}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1682786135974251289
 BoxCollider2D:
@@ -72,7 +72,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetTags: []
   regionType: 1
---- !u!1 &3383425701766995551
+--- !u!1 &2047283463501180985
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -80,56 +80,36 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3383425701766995554}
-  - component: {fileID: 1006772930248377528}
-  - component: {fileID: 3383425701766995548}
-  - component: {fileID: 744791502466639355}
+  - component: {fileID: 3802259148396810561}
+  - component: {fileID: 6960939201732550703}
   m_Layer: 0
-  m_Name: VineBlock
-  m_TagString: Ground
+  m_Name: Sprite
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3383425701766995554
+--- !u!4 &3802259148396810561
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3383425701766995551}
+  m_GameObject: {fileID: 2047283463501180985}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.54, y: 2.61, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 8631130048647291081}
-  m_Father: {fileID: 0}
+  m_Children: []
+  m_Father: {fileID: 3383425701766995554}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1006772930248377528
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3383425701766995551}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d76217b10aa997945875eb98042aa7ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  effectCheck: {fileID: 1007753140951137781}
-  surface: {fileID: 744791502466639355}
-  defaultState: 0
-  offColor: {r: 0.23137255, g: 1, b: 0.32156864, a: 0.4627451}
-  onColor: {r: 0.23113209, g: 1, b: 0.32065088, a: 1}
---- !u!212 &3383425701766995548
+--- !u!212 &6960939201732550703
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3383425701766995551}
+  m_GameObject: {fileID: 2047283463501180985}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -173,6 +153,41 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &3383425701766995551
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3383425701766995554}
+  - component: {fileID: 744791502466639355}
+  - component: {fileID: 3562608806108911772}
+  - component: {fileID: 6595935405689951662}
+  m_Layer: 0
+  m_Name: VineBlock
+  m_TagString: Ground
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3383425701766995554
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3383425701766995551}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.54, y: 2.61, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 3802259148396810561}
+  - {fileID: 8631130048647291081}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &744791502466639355
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -199,3 +214,40 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &3562608806108911772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3383425701766995551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d76217b10aa997945875eb98042aa7ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sr: {fileID: 6960939201732550703}
+  effectCheck: {fileID: 1007753140951137781}
+  surface: {fileID: 744791502466639355}
+  defaultState: 0
+  offColor: {r: 0.23137255, g: 1, b: 0.32156864, a: 0.4627451}
+  onColor: {r: 0.23137255, g: 1, b: 0.32156864, a: 1}
+--- !u!95 &6595935405689951662
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3383425701766995551}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 957be57b53ccf8648a69cab9aa01b1e9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
