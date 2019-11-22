@@ -22,12 +22,20 @@ public class BreakableBlock : MonoBehaviour
 
     private void Update() {
         if (!destroyed && playerCheck.IsColliding()) {
-            StartCoroutine(Break());
+            StartCoroutine(Break(true));
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        Bullet b = other.GetComponent<Bullet>();
+        if (b != null) {
+            b.DestroyBullet();
+            StartCoroutine(Break(false));
         }
     }
 
 
-    private IEnumerator Break() {
+    private IEnumerator Break(bool shouldFreezeFrame) {
         destroyed = true;
 
         // disable this collision
@@ -38,9 +46,13 @@ public class BreakableBlock : MonoBehaviour
         GetComponent<SpriteRenderer>().material = white;
         
         // freeze frame
-        Time.timeScale = 0;
-        yield return new WaitForSecondsRealtime(freezeTime);
-        Time.timeScale = 1;
+        if (shouldFreezeFrame) {
+            Time.timeScale = 0;
+            yield return new WaitForSecondsRealtime(freezeTime);
+            Time.timeScale = 1;
+        } else {
+            yield return 0;
+        }
 
         // spawn particles
         GameObject.Instantiate(breakParticles, transform.position, Quaternion.identity);

@@ -121,7 +121,7 @@ MonoBehaviour:
     trampolineBounceMultiplier: 1.1
     trampolineBounceMultiplierWithJump: 1.4
   rollSpeed: 20
-  rollTime: 0.3
+  rollTime: 0.2
   jumpBufferTime: 0.15
   coyoteTime: 0.15
   interactBufferTime: 0.1
@@ -129,6 +129,7 @@ MonoBehaviour:
   groundcheck: {fileID: 5469750575001678281}
   hazardcheck: {fileID: 1504612737827210429}
   totemcheck: {fileID: 3399870243615498373}
+  checkpointcheck: {fileID: 0}
   rollHitbox: {fileID: 608269929398213313}
   totemHoldObject: {fileID: 5641538591841189161}
   totemThrowVel: {x: 5, y: 5}

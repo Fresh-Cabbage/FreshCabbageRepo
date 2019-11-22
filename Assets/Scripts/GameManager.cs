@@ -9,6 +9,10 @@ public class GameManager : MonoBehaviour
 
     PlayerController player;
     WorldLight worldLight;
+    Camera mainCamera;
+    public Camera MainCamera { get { return mainCamera; }}
+
+    public int previousCheckpoint;
 
     private void Awake() {
         // enforce singleton
@@ -30,7 +34,12 @@ public class GameManager : MonoBehaviour
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
+    private void Start() {
+        previousCheckpoint = -1;
+    }
+
     private void OnSceneLoaded(Scene scene, LoadSceneMode loadMode) {
+        Debug.Log("GAMEMANAGER: onsceneloaded happens");
         player = GameObject.FindGameObjectWithTag("Player")?.GetComponent<PlayerController>();
         if (player == null)
             Debug.LogWarning("No player in this scene!");
@@ -38,8 +47,17 @@ public class GameManager : MonoBehaviour
         worldLight = GameObject.FindGameObjectWithTag("WorldLight")?.GetComponent<WorldLight>();
         if (worldLight == null) 
             Debug.LogWarning("No world light in this scene!");
+
+        mainCamera = GameObject.FindGameObjectWithTag("MainCamera")?.GetComponent<Camera>();
+        if (mainCamera == null)
+            Debug.LogWarning("No camera in this scene!");
         
         worldLight?.FadeIn(0.5f);
+    }
+
+    public void SpawnPlayerAtPosition(Vector2 position) {
+        Debug.Log("GAMEMANAGER: spawnplayer happens " + player);
+        player.transform.position = position;
     }
 
     IEnumerator LoadScene(string name, float delay) {
@@ -66,6 +84,8 @@ public class GameManager : MonoBehaviour
             player.inCutscene = true;
         if (worldLight != null)
             worldLight.Flash(2, 1);
+
+        previousCheckpoint = -1;
         
         StartCoroutine(LoadScene(SceneManager.GetActiveScene().buildIndex + 1, 2.0f));
         StartCoroutine(FadeOut(1.5f, 0.5f));
