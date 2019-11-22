@@ -1,28 +1,16 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+[RequireComponent(typeof(Managers))]
+public class LevelManager : MonoBehaviour
 {
-    [HideInInspector] public static GameManager Instance;
-
     PlayerController player;
     WorldLight worldLight;
-    Camera mainCamera;
-    public Camera MainCamera { get { return mainCamera; }}
+    public Camera MainCamera { get; private set; }
 
     public int previousCheckpoint;
-
-    private void Awake() {
-        // enforce singleton
-        if (Instance == null)
-            Instance = this;
-        else if (Instance != this)
-            Destroy(gameObject);
-        
-        DontDestroyOnLoad(gameObject);
-    }
 
     private void OnEnable() {
         // subscribe GameManager to the scene loaded event
@@ -39,7 +27,6 @@ public class GameManager : MonoBehaviour
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode loadMode) {
-        Debug.Log("GAMEMANAGER: onsceneloaded happens");
         player = GameObject.FindGameObjectWithTag("Player")?.GetComponent<PlayerController>();
         if (player == null)
             Debug.LogWarning("No player in this scene!");
@@ -48,8 +35,8 @@ public class GameManager : MonoBehaviour
         if (worldLight == null) 
             Debug.LogWarning("No world light in this scene!");
 
-        mainCamera = GameObject.FindGameObjectWithTag("MainCamera")?.GetComponent<Camera>();
-        if (mainCamera == null)
+        MainCamera = GameObject.FindGameObjectWithTag("MainCamera")?.GetComponent<Camera>();
+        if (MainCamera == null)
             Debug.LogWarning("No camera in this scene!");
         
         worldLight?.FadeIn(0.5f);
@@ -89,10 +76,5 @@ public class GameManager : MonoBehaviour
         
         StartCoroutine(LoadScene(SceneManager.GetActiveScene().buildIndex + 1, 2.0f));
         StartCoroutine(FadeOut(1.5f, 0.5f));
-    }
-
-
-    private void Update() {
-        
     }
 }

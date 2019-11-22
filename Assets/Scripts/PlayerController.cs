@@ -424,7 +424,7 @@ public class PlayerController : MonoBehaviour
 
     public void Die() {
         OnDeath?.Invoke();
-        GameManager.Instance?.PlayerDied();
+        Managers.LevelManager?.PlayerDied();
 
         GameObject.Instantiate(deathParticles, transform.position, Quaternion.identity);
 

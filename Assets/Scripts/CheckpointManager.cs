@@ -16,8 +16,8 @@ public class CheckpointManager : MonoBehaviour
                 c.checkpointManager = this;
                 c.checkpointNumber = checkpointCounter;
 
-                if (c.checkpointNumber == GameManager.Instance?.previousCheckpoint) {
-                    GameManager.Instance.SpawnPlayerAtPosition(c.respawnPosition);
+                if (c.checkpointNumber == Managers.LevelManager?.previousCheckpoint) {
+                    Managers.LevelManager.SpawnPlayerAtPosition(c.respawnPosition);
                     currentCheckpoint = c;
                     c.SetActivated(true);
                 } else {
@@ -40,7 +40,7 @@ public class CheckpointManager : MonoBehaviour
         currentCheckpoint = checkpoint;
         currentCheckpoint.SetActivated(true);
 
-        if (GameManager.Instance != null)
-            GameManager.Instance.previousCheckpoint = currentCheckpoint.checkpointNumber;
+        if (Managers.LevelManager != null)
+            Managers.LevelManager.previousCheckpoint = currentCheckpoint.checkpointNumber;
     }
 }

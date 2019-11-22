@@ -13,7 +13,7 @@ public class BGParallax : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        camera = GameManager.Instance?.MainCamera?.gameObject;
+        camera = Managers.LevelManager?.MainCamera?.gameObject;
         cameraPrevPos = camera.transform.position;
     }
 

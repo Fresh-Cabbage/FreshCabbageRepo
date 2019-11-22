@@ -11,6 +11,6 @@ public class LevelFinisher : MonoBehaviour
         GameObject.Instantiate(finishExplosion, transform.position, Quaternion.identity);
         // GameObject.Instantiate(finishLight, transform.position, Quaternion.identity);
 
-        GameManager.Instance?.CompletedLevel();
+        Managers.LevelManager?.CompletedLevel();
     }
 }
