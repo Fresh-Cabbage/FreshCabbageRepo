@@ -144,6 +144,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6335338240978446166}
   - component: {fileID: 6335338240978446167}
+  - component: {fileID: 7963990670012512447}
   m_Layer: 0
   m_Name: BulletCannon
   m_TagString: Untagged
@@ -187,6 +188,25 @@ MonoBehaviour:
   tip: {fileID: 6335338240954982469}
   bullet: {fileID: 1354170454125195456, guid: 4bc1074bebf52b346a1031b86eac46f4, type: 3}
   electricCheck: {fileID: 6335338240004502163}
+--- !u!95 &7963990670012512447
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6335338240978446164}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0c183c6f551f20b418e2e36d207c5855, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6335338241122780821
 GameObject:
   m_ObjectHideFlags: 0
@@ -321,7 +341,7 @@ Transform:
   m_GameObject: {fileID: 6335338241236693909}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 0.7, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6335338239725073934}
   m_RootOrder: 0
@@ -365,8 +385,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: 624871634d699fb4f808dc8a749d9ef6, type: 3}
-  m_Color: {r: 1, g: 0.81639886, b: 0.6367924, a: 1}
+  m_Sprite: {fileID: 21300000, guid: afad17931601acb4da1b45b1ee91bb33, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

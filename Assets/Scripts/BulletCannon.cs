@@ -16,18 +16,31 @@ public class BulletCannon : MonoBehaviour
     public GameObject bullet;
 
     public EffectCheck electricCheck;
+    
+    Animator anim;
 
+
+    private void Start() {
+        anim = GetComponent<Animator>();
+    }
 
     private void Update() {
         if (defaultOn != electricCheck.IsColliding()) {
             fireTimer = Helpers.Timer(fireTimer);
             
             if (fireTimer == 0) {
-                GameObject b = GameObject.Instantiate(bullet, tip.position, Quaternion.identity);
-                b.GetComponent<Bullet>()?.SetDirection(axis.rotation, fireSpeed);
-                fireTimer = fireInterval;
+                Fire();
             }
         }
+    }
+
+    private void Fire() {
+        GameObject b = GameObject.Instantiate(bullet, tip.position, Quaternion.identity);
+        b.GetComponent<Bullet>()?.SetDirection(axis.rotation, fireSpeed);
+        
+        fireTimer = fireInterval;
+    
+        anim.SetTrigger("Fired");
     }
 
 }
