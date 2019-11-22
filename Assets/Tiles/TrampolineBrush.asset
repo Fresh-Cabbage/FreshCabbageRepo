@@ -38,4 +38,4 @@ MonoBehaviour:
   m_Prefabs:
   - {fileID: 1109289790513495176, guid: c1059c47d7a7d1a479954f2b0636aeec, type: 3}
   m_PerlinScale: 0.5
-  m_Anchor: {x: 0.5, y: 0.1, z: 0.5}
+  m_Anchor: {x: 0.5, y: 0, z: 0.5}
