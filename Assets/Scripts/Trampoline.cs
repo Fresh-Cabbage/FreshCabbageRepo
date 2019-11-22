@@ -4,12 +4,28 @@ using UnityEngine;
 
 public class Trampoline : MonoBehaviour
 {
+    public bool reactsToTotem;
+
+    public EffectCheck effectCheck;
+    Collider2D bounceHitbox;
+    private bool active;
+
     public float bounceStrength;
 
     Animator anim;
 
     private void Start() {
+        bounceHitbox = GetComponent<Collider2D>();
         anim = GetComponent<Animator>();
+    
+        active = !reactsToTotem;
+    }
+
+    private void Update() {
+        active = !reactsToTotem || effectCheck.IsColliding();
+
+        bounceHitbox.enabled = active;
+        anim.SetBool("Active", active);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
