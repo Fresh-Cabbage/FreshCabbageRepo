@@ -8,7 +8,12 @@ public class TitleStuff : MonoBehaviour
     //A class to hold functions for title stuff
     //e.g. starting a game, loading a game, quitting
 
-    public void StartGame(string sceneName)
+    public void StartGame()
+    {
+        SceneManager.LoadScene(1);
+    }
+
+    public void LoadLevel(string sceneName)
     {
         /**
          * NOTE TO DESIGNERS:
@@ -17,6 +22,12 @@ public class TitleStuff : MonoBehaviour
          * has been added to the build.
          */
         SceneManager.LoadScene(sceneName);
+    }
+
+    public void LoadLevel(int sceneNum)
+    {
+        //use this one if you don't want to use the level name
+        SceneManager.LoadScene(sceneNum);
     }
 
     public void QuitGame()

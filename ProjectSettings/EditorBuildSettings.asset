@@ -6,28 +6,31 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/Scenes/Test Levels/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/TitleScene.unity
+    path: Assets/Scenes/Menus/TitleScene.unity
     guid: ebb9ccaf3944ed9449032293b6951e88
   - enabled: 0
-    path: Assets/Scenes/test.unity
+    path: Assets/Scenes/Test Levels/test.unity
     guid: 932bcd1e0ec3b2040af91ecf080d36af
   - enabled: 1
-    path: Assets/Scenes/Tutorial.unity
+    path: Assets/Scenes/Menus/LevelSelect.unity
+    guid: ef4ba6b67b6954849b21d6851a75cb6e
+  - enabled: 1
+    path: Assets/Scenes/Actual Levels/Tutorial.unity
     guid: e60c91cde10e7284c881a213c3b2eafd
   - enabled: 1
-    path: Assets/Scenes/VineBlockLevel.unity
+    path: Assets/Scenes/Actual Levels/VineBlockLevel.unity
     guid: 979138b253d83b848ba4ab83fe331774
   - enabled: 1
-    path: Assets/Scenes/TrampolineLevel.unity
+    path: Assets/Scenes/Actual Levels/TrampolineLevel.unity
     guid: 9e263fc2d0ad6f94ea4c89cd423ec42c
   - enabled: 1
-    path: Assets/Scenes/BreakBlockLevel.unity
+    path: Assets/Scenes/Actual Levels/BreakBlockLevel.unity
     guid: 9042925566c2b8441a76b21e1cce7058
   - enabled: 1
-    path: Assets/Scenes/EndDemo.unity
+    path: Assets/Scenes/Actual Levels/EndDemo.unity
     guid: 4e8b8ea5a13f1674e9d965035d534367
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 53b96d9f78099e94c94719504b3a3190,
